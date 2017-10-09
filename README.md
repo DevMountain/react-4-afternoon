@@ -52,7 +52,6 @@ To begin our project, we will be installing the required dependencies and config
 ```jsx
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-
 import Home from './components/Home/Home';
 import About from './components/About/About';
 
@@ -87,7 +86,7 @@ In this step, we will take the router we just configured in `src/router.js` and 
 
 <summary>src/index.js</summary>
 
-```js
+```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom';
@@ -107,7 +106,7 @@ ReactDOM.render(
 
 <summary>src/App.js</summary>
 
-```js
+```jsx
 import React, { Component } from 'react';
 import router from './router';
 import './App.css';
@@ -142,6 +141,7 @@ In this step, we will be adding links to render our home and about views.
 
 ### Instructions
 
+* Open `src/App.js`.
 * Import `Link` from `react-router-dom`.
 * Locate the `div` elements with className of links.
     * Replace the `div` elements to be `Link` components.
@@ -154,7 +154,7 @@ In this step, we will be adding links to render our home and about views.
 
 <summary>src/App.js</summary>
 
-```js
+```jsx
 import React, { Component } from 'react';
 import router from './router';
 import './App.css';
@@ -185,12 +185,79 @@ export default class App extends Component {
 
 ### Summary
 
-In this step, we will be adding links to render our home and about views.
+In this step, we will be adding a new route for our `ClassList` component. We will also be adding `Link` components in the `Home` page to link to and render the `ClassList` component for each of the listed classes.
 
 ### Instructions
 
+* Open `src/router.js`.
+* Import the `ClassList` component to use as a route.
+* `ClassList` will need to render the students for that specific class. In order to do this, we will be using params.
+* Create a new route with the path being `/classlist/:class` and the component being the `ClassList` component you previously imported.
+* Open `src/Home/Home.js`.
+* Import `Link` from `react-router-dom`.
+* Wrap each `button` element with a `Link` component.
+* Each link should direct to the path `/classlist` with the class name added to the path ending.
+    * Math 1010 - `/classlist/MATH1010`
+    * English 2010 - `/classlist/ENG2010`
+    * Biology 2020 - `/classlist/BIO2020`
 
-5. In our Home.js file we need the Math 1010 button to link to our ClassList component. 
+The `ClassList` component will not be rendering the student enrollment list just yet, we will be doing that in the next step.
+
+### Solution
+
+<details>
+
+<summary>src/router.js</summary>
+
+```jsx
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Home from './components/Home/Home';
+import About from './components/About/About';
+import ClassList from './components/ClassList/ClassList';
+
+export default (
+  <Switch>
+    <Route component={ Home } exact path="/" />
+    <Route component={ About } path="/about" />
+    <Route path='/classlist/:class' component={ ClassList } />
+  </Switch>
+)
+```
+
+</details> 
+
+<details>
+
+<summary>src/Home/Home.js</summary>
+
+```jsx
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import '../../App.css';
+
+export default class Home extends Component {
+
+  render() {
+    return (
+      <div className="App">
+        <Link to='/classlist/MATH1010'><button className='btn'>Math 1010</button></Link>
+        <Link to='/classlist/ENG2010'><button className='btn'>English 2010</button></Link>
+        <Link to='/classlist/BIO2020'><button className='btn'>Biology 2020</button></Link>
+      </div>
+    );
+  }
+}
+```
+
+</details>
+
+## Step 5
+
+### Summary
+
+
+### Instructions
 
 
 6. In the ClassList.js component we will be making a call to get our data from the `json-server`. 
