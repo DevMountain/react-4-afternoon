@@ -4,14 +4,54 @@
 
 Goal: Create a web application with 4 different
 
-1. Setup:
-  - `Fork` and `clone` this repository
-  - `cd` into the project
-  - Run `npm install`;
-    - One of the packages that was installed was `json-server`. This library will mimic a ReST api and allow you to make http requests for the student data.
+## Setup:
+* `Fork` and `clone` this repository
+* `cd` into the project
+* Run `npm install`;
+    * One of the packages that was installed was `json-server`. This library will mimic a ReST api and allow you to make http requests for the student data.
+* Run `npm start` to spin up the development server
+* In a separate terminal, run `npm run api` to start the json-server.
+
+## Step 1
+
+### Summary
+
+To begin our project, we will be installing the required dependencies and configuring the router.
+
+### Instructions
+* Install React Router.
+* Create a new file in `src/` named `router.js`.
+* Configure a router in `src/router.js`: 
+    * Import `Switch` and `Route` from `react-router-dom`.
+    * Import the following components to use as routes:
+        * `src/components/Home/Home.js`
+        * `src/components/About/About.js`
+    * Use the following combinations of paths and components for your router:
+        * Path: "/" - Component: `Home` - This path should be exact.
+        * Path: "/about" - Component: `About`.
+
+### Solution
+<details>
+<summary>src/router.js</summary>
+
+```jsx
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+
+import Home from './components/Home/Home';
+import About from './components/About/About';
+
+export default (
+  <Switch>
+    <Route component={ Home } exact path="/" />
+    <Route component={ About } path="/about" />
+  </Switch>
+)
+```
+
+</details>
+
  - Run `npm install --save react-router-dom`
- - Run `npm start` to spin up the development server
- - In a separate terminal, run `npm run api` to start the json-server.
 
 2. In index.js, import HashRouter from 'react-router-dom'
     - Wrap the App component with HashRouter.
