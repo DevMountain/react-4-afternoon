@@ -423,11 +423,70 @@ Using the student's id which was passed as a parameter in the url, we will make 
 
 ### Instructions
 
+* Open `src/components/Student/Student.js`.
+* We first need to initialize state.
+    * In the `constructor` method, initialize state with a property named `studentInfo` set to the value of an empty object.
+* We now need to make an HTTP request to our `json-server` to get information for the specific student.
+    * Import `axios`.
+    * Create a `componentDidMount` lifecycle hook method.
+    * Inside of the `componentDidMount` lifecylce hook method, make a get request using `axios` to `http://localhost:3005/students/`. Using `params`, add to the end of the request URL the id that was passed as a parameter.
+    * Update state's `studentInfo` to be the returning data.
+* Now that we have the data for the student, we can display it on the page.
+    * Underneath the `h1` tag, display state's `studentInfo` properties:
+        * `first_name` and `last_name` within an `h3` tag.
+        * The text `Grade:` followed by the `grade` property within a `p` tag.
+        * The text `Email:` followed by the `email` property within a `p` tag.
+
+### Solution
+
+<details>
+
+<summary>src/components/Student/Student.js</summary>
+
+```jsx
+import React, { Component } from 'react';
+import axios from 'axios';
+
+export default class Student extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            studentInfo: {}
+        }
+    }
+
+    componentDidMount() {
+        return axios.get(`http://localhost:3005/students/${this.props.match.params.id}`).then(res => {
+            this.setState({
+                studentInfo: res.data
+            })
+        })
+    }
+    
+    render() {
+
+        return (
+            <div>
+                <h1>Student</h1>
+                <h3>{this.state.studentInfo.first_name} {this.state.studentInfo.last_name}</h3>
+                <p>Grade: {this.state.studentInfo.grade}</p>
+                <p>Email: {this.state.studentInfo.email}</p>
+            </div>
+        )
+    }
+}
+```
+
+</details>
+
 ## Step 8
 
 ### Summary
 
-We now want to create the nested routes in the `About` component with the `History` and the `Contact` components.
+We now want to create the nested routes in the `About` component with the `History` and `Contact` components.
 
 ### Instructions
 
+* Open `src/router.js`.
+* 
