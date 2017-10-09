@@ -1,10 +1,21 @@
-# routing-afternoon
+<img src="https://devmounta.in/img/logowhiteblue.png" width="250" align="right">
 
-## Instructions:
+# Project Summary
 
-Goal: Create a web application with 4 different
+![wireframes](wireframes.png)
+
+In this project we will be building a site for a University to keep track of student and class information along with student enrollment. We will be using React Router to navigate between the various views required. Take some time to familiarize yourself with the provided components. 
+
+* `App` will be the top level component for our application.
+* `Home` will be the home page displayed when the application first loads.
+* `About` will be the about page displaying information about the University.
+    * `History` will be a nested view with the about page and will display the history of the university.
+    * `Contact` will be a nested view with the about page and will display the University's contact information.
+* `ClassList` will display all the enrolled students for that specific class.
+* `Student` will be the detail view for a particular student.
 
 ## Setup:
+
 * `Fork` and `clone` this repository
 * `cd` into the project
 * Run `npm install`;
@@ -19,6 +30,7 @@ Goal: Create a web application with 4 different
 To begin our project, we will be installing the required dependencies and configuring the router.
 
 ### Instructions
+
 * Install React Router.
 * Create a new file in `src/` named `router.js`.
 * Configure a router in `src/router.js`: 
@@ -26,12 +38,15 @@ To begin our project, we will be installing the required dependencies and config
     * Import the following components to use as routes:
         * `src/components/Home/Home.js`
         * `src/components/About/About.js`
-    * Use the following combinations of paths and components for your router:
+    * Create an empty `export default ()` statement.
+    * Use the following combinations of paths and components for your router within the export default parentheses:
         * Path: "/" - Component: `Home` - This path should be exact.
         * Path: "/about" - Component: `About`.
 
 ### Solution
+
 <details>
+
 <summary>src/router.js</summary>
 
 ```jsx
@@ -51,33 +66,128 @@ export default (
 
 </details>
 
- - Run `npm install --save react-router-dom`
+## Step 2
 
-2. In index.js, import HashRouter from 'react-router-dom'
-    - Wrap the App component with HashRouter.
-3. Create a router.js file.
-  - import Switch, Route from 'react-router-dom'
-  - Create an empty export default statement using ( ).
-  - Import the following components:
-    - Home - This componenet will be the landing page of our application.
-    - About - This component will be a page that displays information about the university. 
-  - Inside the parentheses return a Switch component with nested Route components: 
-    - Home: 
-        - Set the path prop of this component to be "/".
-        - Add the exact prop to this component.
-        - Set the component prop of this component to be { Home }
-    - About: 
-        - Set the path prop of this component to be "/about".
-        - Set the component prop of this component to be { About }
+### Summary
 
-4. In this step, we will modify our App.js to render our router onto the DOM.
-    - Import router from src/router.js
-    - Render router below the nav tags. 
-    - Import Link from 'react-router-dom'.
-    - Locate the elements with className of links.
-        - Wrap these elements in their own Link Component.
-        - Home link should be sent to '/'.
-        - About link should be sent to '/about'.
+In this step, we will take the router we just configured in `src/router.js` and add it to our application in `src/index.js`.
+
+### Instructions
+
+* Open `src/index.js`.
+* Import `HashRouter` from `react-router-dom`.
+* Wrap the `Provider` component in a `HashRouter` component.
+* Open `src/components/App.js`.
+* Import `router` from `src/router.js`.
+* Underneath the `nav` element render the `router` JSX.
+
+### Solution
+
+<details>
+
+<summary>src/index.js</summary>
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { HashRouter } from 'react-router-dom';
+import './index.css';
+import App from './App';
+
+ReactDOM.render(
+    <HashRouter>
+      <App />
+    </HashRouter>
+, document.getElementById('root'));
+```
+
+</details>
+
+<details>
+
+<summary>src/App.js</summary>
+
+```js
+import React, { Component } from 'react';
+import router from './router';
+import './App.css';
+
+export default class App extends Component {
+
+    render() {
+        return (
+           <div>
+               <nav className='nav'>
+                   <div>WestSide University</div> 
+                   <div className='link-wrap'>
+                        <div className='links'>Home</div>
+                        <div className='links'>About</div> 
+                   </div>  
+               </nav>
+            { router }
+           </div> 
+        )
+    }
+
+}
+```
+
+</details>
+
+## Step 3
+
+### Summary
+
+In this step, we will be adding links to render our home and about views.
+
+### Instructions
+
+* Import `Link` from `react-router-dom`.
+* Locate the `div` elements with className of links.
+    * Replace the `div` elements to be `Link` components.
+    * The Home link should be sent to `/`.
+    * The About link should be sent to `/about`.
+
+### Solution
+
+<details>
+
+<summary>src/App.js</summary>
+
+```js
+import React, { Component } from 'react';
+import router from './router';
+import './App.css';
+
+export default class App extends Component {
+
+    render() {
+        return (
+           <div>
+               <nav className='nav'>
+                   <div>WestSide University</div> 
+                   <div className='link-wrap'>
+                        <Link to="/" className='links'>Home</Link>
+                        <Link to="/about" className='links'>About</Link> 
+                   </div>  
+               </nav>
+            { router }
+           </div> 
+        )
+    }
+
+}
+```
+
+</details>
+
+## Step 4
+
+### Summary
+
+In this step, we will be adding links to render our home and about views.
+
+### Instructions
 
 
 5. In our Home.js file we need the Math 1010 button to link to our ClassList component. 
@@ -95,4 +205,3 @@ export default (
 
 9. The About.js component will have a nested routes to the History and Contact components. 
 
-![wireframes](wireframes.png)

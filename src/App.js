@@ -3,10 +3,9 @@ import './App.css';
 
 export default class App extends Component {
 
-
     render() {
         return (
-           <div className=''>
+           <div>
                <nav className='nav'>
                    <div>WestSide University</div> 
                    <div className='link-wrap'>
@@ -18,6 +17,5 @@ export default class App extends Component {
            </div> 
         )
     }
-
 
 }
