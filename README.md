@@ -191,7 +191,7 @@ In this step, we will be adding a new route for our `ClassList` component. We wi
 
 * Open `src/router.js`.
 * Import the `ClassList` component to use as a route.
-* `ClassList` will need to render the students for that specific class. In order to do this, we will be using params.
+* The `ClassList` component will need to render the students for that specific class. In order to do this, we will be using params.
 * Create a new route with the path being `/classlist/:class` and the component being the `ClassList` component you previously imported.
 * Open `src/Home/Home.js`.
 * Import `Link` from `react-router-dom`.
@@ -256,7 +256,7 @@ export default class Home extends Component {
 
 ### Summary
 
-We will now work with our `ClassList` component to display the students enrolled for that specific class.
+We will now work with our `ClassList` component to display the students enrolled for that specific class. To get this data, we will be making an HTTP call to our `json-server`.
 
 ### Instructions
 
@@ -278,6 +278,7 @@ We will now work with our `ClassList` component to display the students enrolled
     * Now use a `.map()` method on `this.state.students`.
     * Within the `.map()` method's callback function, return an `h3` tag that renders the JSX for the student's `first_name` and `last_name`. Don't forget to give the element a `key` prop.
     * Underneath the `h2` tag with `ClassList:`, render the `students` variable.
+* Within the `h1` tags, put the value of class from the `params` object so that we can see the class name that we're looking at.
 
 ### Solution
 
@@ -299,7 +300,7 @@ export default class ClassList extends Component {
     }
 
     componentDidMount() {
-        return axios.get('http://localhost:3005/students?class=' + this.props.match.params.class).then(res => {
+        return axios.get(`http://localhost:3005/students?class=${this.props.match.params.class}`).then(res => {
             this.setState({
                 students: res.data
             })
@@ -313,7 +314,7 @@ export default class ClassList extends Component {
 
         return (
             <div>
-                <h1></h1>
+                <h1>{ this.props.match.params.class }</h1>
                 <h2>ClassList:</h2>
                 { students }
             </div>
@@ -325,16 +326,108 @@ export default class ClassList extends Component {
 
 </details>
 
+## Step 6
 
-6. In the ClassList.js component we will be making a call to get our data from the `json-server`. 
-    - Make a get request to `http://localhost:3005/students` and display all the student names in a list on the screen.
+### Summary
 
+Now that we are getting the class enrollment list for each class, we will starting setting up the Student detail view.
 
-7. Each of the student's names will need to link Student.js component passing up the student's id to the url as a parameter. 
-    
+### Instructions
 
-8. The Student.js component will take the Student's id which was passed as a parameter in the url and will make an api call to `http://localhost:3005/students/` + id to get and display the student's information. 
+* Open `src/router.js`.
+* Import the `Student` component to use as a route.
+* The `Student` component will need to render the details for a specific student. In order to do this, we will be using params.
+* Create a new route with the path being `/student/:id` and the component being the `Student` component you previously imported.
+* Open `src/components/ClassList/ClassList.js`.
+* Each of the student's names will need to link to the `Student` component passing up the student's id to the url as a parameter.
+    * Import `Link` from `react-router-dom`.
+    * Inside the callback function for the `.map()` method, wrap the `h3` tag being returned with a `Link` component. Have that `Link` component direct to `/student/${student.id}`.
 
+### Solution
 
-9. The About.js component will have a nested routes to the History and Contact components. 
+<details>
+
+<summary>src/router.js</summary>
+
+```jsx
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Home from './components/Home/Home';
+import About from './components/About/About';
+import ClassList from './components/ClassList/ClassList';
+import Student from './components/Student/Student';
+
+export default (
+  <Switch>
+    <Route component={ Home } exact path="/" />
+    <Route component={ About } path="/about" />
+    <Route path='/classlist/:class' component={ ClassList } />
+    <Route path='/student/:id' component={ Student } />
+  </Switch>
+)
+```
+
+</details>
+
+<details>
+
+<summary>src/components/ClassList/ClassList.js</summary>
+
+```jsx
+import React, { Component } from 'react';
+import axios from 'axios';
+
+export default class ClassList extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            students: []
+        }
+    }
+
+    componentDidMount() {
+        return axios.get(`http://localhost:3005/students?class=${this.props.match.params.class}`).then(res => {
+            this.setState({
+                students: res.data
+            })
+        })
+    }
+
+    render() {
+        const students = this.state.students.map((student, i) => (
+            <Link to={`/student/${student.id}`} key={i}>
+                <h3>{ student.first_name } { student.last_name }</h3>
+            </Link>
+        ))
+
+        return (
+            <div>
+                <h1>{ this.props.match.params.class }</h1>
+                <h2>ClassList:</h2>
+                { students }
+            </div>
+        )
+    }
+
+}
+```
+
+</details>
+
+## Step 7
+
+### Summary
+
+Using the student's id which was passed as a parameter in the url, we will make an HTTP request to our `json-server` for that specific student's information. We will display the specific student's information in the `Student` component.
+
+### Instructions
+
+## Step 8
+
+### Summary
+
+We now want to create the nested routes in the `About` component with the `History` and the `Contact` components.
+
+### Instructions
 
