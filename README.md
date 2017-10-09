@@ -256,8 +256,74 @@ export default class Home extends Component {
 
 ### Summary
 
+We will now work with our `ClassList` component to display the students enrolled for that specific class.
 
 ### Instructions
+
+* Open `src/components/ClassList/ClassList.js`.
+* We first need to initialize state for this component.
+    * Within the `constructor` method, initialize state with a property named `students` set to the value of an empty array.
+* Now we will be making an HTTP request to get the student enrollment data for the specific class.
+    * We will be using `axios` to make our HTTP request.
+        * Install the package `axios`.
+        * Import `axios` into the `ClassList` component.
+    * Create a `componentDidMount` lifecycle hook method.
+    * Within this method, make a get request using `axios` to the URL `http://localhost:3005/students?class=`
+        * This URL is incomplete, we need to be getting data for the specific class which is stored in `params`.
+        * Using `params`, add the property value `class` to the ending of the request URL so that the get request will be making a query for the specific class that was selected.
+    * Once the data returns, we will need to set `students` in state to the new data.
+* Now that we are receiving the correct data and setting state to the newly received data, we need to display that data.
+    * Creating a new variable named `students` within the render method.
+    * Set the variable `students` equal to the property `students` from state.
+    * Now use a `.map()` method on `this.state.students`.
+    * Within the `.map()` method's callback function, return an `h3` tag that renders the JSX for the student's `first_name` and `last_name`. Don't forget to give the element a `key` prop.
+    * Underneath the `h2` tag with `ClassList:`, render the `students` variable.
+
+### Solution
+
+<details>
+
+<summary>src/components/ClassList/ClassList.js</summary>
+
+```jsx
+import React, { Component } from 'react';
+import axios from 'axios';
+
+export default class ClassList extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            students: []
+        }
+    }
+
+    componentDidMount() {
+        return axios.get('http://localhost:3005/students?class=' + this.props.match.params.class).then(res => {
+            this.setState({
+                students: res.data
+            })
+        })
+    }
+
+    render() {
+        const students = this.state.students.map((student, i) => (
+            <h3 key={i}>{ student.first_name } { student.last_name }</h3>
+        ))
+
+        return (
+            <div>
+                <h1></h1>
+                <h2>ClassList:</h2>
+                { students }
+            </div>
+        )
+    }
+
+}
+```
+
+</details>
 
 
 6. In the ClassList.js component we will be making a call to get our data from the `json-server`. 
