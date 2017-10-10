@@ -2,7 +2,7 @@
 
 # Project Summary
 
-![wireframes](wireframes.png)
+![wireframes](readme-assets/wireframes.png)
 
 In this project we will be building a site for a University to keep track of student and class information along with student enrollment. We will be using React Router to navigate between the various views required. Take some time to familiarize yourself with the provided components. 
 
@@ -250,6 +250,8 @@ export default class Home extends Component {
 
 </details>
 
+![home-view](readme-assets/home-view.png)
+
 ## Step 5
 
 ### Summary
@@ -340,6 +342,7 @@ Now that we are getting the class enrollment list for each class, we will starti
 * Each of the student's names will need to link to the `Student` component passing up the student's id to the url as a parameter.
     * Import `Link` from `react-router-dom`.
     * Inside the callback function for the `.map()` method, wrap the `h3` tag being returned with a `Link` component. Have that `Link` component direct to `/student/${student.id}`.
+* You should now be able to navigate from the `ClassList` view to the `Student` detail view.
 
 ### Solution
 
@@ -413,6 +416,8 @@ export default class ClassList extends Component {
 ```
 
 </details>
+
+![student-detail-view](readme-assets/student-detail-view.gif)
 
 ## Step 7
 
@@ -551,7 +556,7 @@ We will finish by nesting the routes to the `About`, `History`, and `Contact` co
 
 ```jsx
 <div>
-    <h1>About the University</h1>
+    <h1 className='title'>About WestSide University:</h1>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod eu lorem et ultricies. In porta lorem at dui semper porttitor. Nullam quis cursus dui. Cras tincidunt vehicula tellus eu facilisis. Donec nisi turpis, iaculis et arcu a, aliquet ultrices nisl. Nam in pharetra odio, ac blandit metus. Suspendisse potenti. Praesent elementum diam non orci cursus rutrum. Pellentesque condimentum ultrices dignissim. Sed a tempor ligula, vel luctus sapien. Mauris vehicula rutrum massa. Duis condimentum, ex quis ullamcorper rhoncus, erat libero tempor arcu, condimentum facilisis tellus lectus ut nunc. Pellentesque vitae faucibus diam. Vestibulum eu erat ex. Ut justo neque, varius aliquet erat vel, scelerisque convallis lacus. Mauris semper lorem mauris, sed dignissim eros consectetur nec.</p>
 </div>
 ```
@@ -559,6 +564,7 @@ We will finish by nesting the routes to the `About`, `History`, and `Contact` co
 </details>
 
 * Make sure to add this route after the History and Contact routes otherwise only the About route will be loaded.
+* You should now be able to navigate between each of the `About`, `History`, and `Contact` views from the sub nav.
 
 ### Solution
 
@@ -602,6 +608,8 @@ export default class About extends Component {
 ```
 
 </details>
+
+![about-nested-routes](readme-assets/about-nested-routes.gif)
 
 ## Black Diamond
 
