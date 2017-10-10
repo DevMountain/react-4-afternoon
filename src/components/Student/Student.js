@@ -8,7 +8,7 @@ export default class Student extends Component {
 
     render() {
       return (
-        <div>
+        <div className="box">
           <h1>Student</h1>
         </div>
       )

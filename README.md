@@ -21,7 +21,7 @@ In this project we will be building a site for a University to keep track of stu
 * Run `npm install`;
     * One of the packages that was installed was `json-server`. This library will mimic a ReST api and allow you to make http requests for the student data.
 * Run `npm start` to spin up the development server
-* In a separate terminal, run `npm run api` to start the json-server.
+* In a separate terminal, run `npm run api` to start the json-server. This step is important, you won't be able to get data through HTTP requests if this is not running.
 
 ## Step 1
 
@@ -90,7 +90,7 @@ In this step, we will take the router we just configured in `src/router.js` and 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom';
-import './index.css';
+import './main.css';
 import App from './App';
 
 ReactDOM.render(
@@ -109,7 +109,6 @@ ReactDOM.render(
 ```jsx
 import React, { Component } from 'react';
 import router from './router';
-import './App.css';
 
 export default class App extends Component {
 
@@ -156,8 +155,8 @@ In this step, we will be adding links to render our home and about views.
 
 ```jsx
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import router from './router';
-import './App.css';
 
 export default class App extends Component {
 
@@ -234,13 +233,12 @@ export default (
 ```jsx
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import '../../App.css';
 
 export default class Home extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="box">
         <Link to='/classlist/MATH1010'><button className='btn'>Math 1010</button></Link>
         <Link to='/classlist/ENG2010'><button className='btn'>English 2010</button></Link>
         <Link to='/classlist/BIO2020'><button className='btn'>Biology 2020</button></Link>
@@ -313,7 +311,7 @@ export default class ClassList extends Component {
         ))
 
         return (
-            <div>
+            <div className='box'>
                 <h1>{ this.props.match.params.class }</h1>
                 <h2>ClassList:</h2>
                 { students }
@@ -375,6 +373,7 @@ export default (
 
 ```jsx
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default class ClassList extends Component {
@@ -402,7 +401,7 @@ export default class ClassList extends Component {
         ))
 
         return (
-            <div>
+            <div className='box'>
                 <h1>{ this.props.match.params.class }</h1>
                 <h2>ClassList:</h2>
                 { students }
@@ -433,9 +432,9 @@ Using the student's id which was passed as a parameter in the url, we will make 
     * Update state's `studentInfo` to be the returning data.
 * Now that we have the data for the student, we can display it on the page.
     * Underneath the `h1` tag, display state's `studentInfo` properties:
-        * `first_name` and `last_name` within an `h3` tag.
-        * The text `Grade:` followed by the `grade` property within a `p` tag.
-        * The text `Email:` followed by the `email` property within a `p` tag.
+        * `first_name` and `last_name` within an `h1` tag.
+        * The text `Grade:` followed by the `grade` property within an `h3` tag.
+        * The text `Email:` followed by the `email` property within an `h3` tag.
 
 ### Solution
 
@@ -467,11 +466,11 @@ export default class Student extends Component {
     render() {
 
         return (
-            <div>
-                <h1>Student</h1>
-                <h3>{this.state.studentInfo.first_name} {this.state.studentInfo.last_name}</h3>
-                <p>Grade: {this.state.studentInfo.grade}</p>
-                <p>Email: {this.state.studentInfo.email}</p>
+            <div className='box'>
+                <h1>Student:</h1>
+                <h1>{this.state.studentInfo.first_name} {this.state.studentInfo.last_name}</h1>
+                <h3>Grade: {this.state.studentInfo.grade}</h3>
+                <h3>Email: {this.state.studentInfo.email}</h3>
             </div>
         )
     }
@@ -484,9 +483,138 @@ export default class Student extends Component {
 
 ### Summary
 
-We now want to create the nested routes in the `About` component with the `History` and `Contact` components.
+We now will add the subnav bar that will link to the soon to be nested `About`, `History`, and `Contact` components.
 
 ### Instructions
 
-* Open `src/router.js`.
-* 
+* Open `src/components/About/About.js`.
+* Import `Link` from `react-router-dom`.
+* Inside the `div` with the className `subnav`, add 3 `h3` tags with the text:
+    * `About`
+    * `History`
+    * `Contact`
+* Wrap each `h3` tag with a `Link` component that links the following paths:
+    * About - `/about`
+    * History - `/about/history`
+    * Contact - `/about/contact`
+* Give each of these `Link` components the className `subnav_links`.
+
+### Solution
+
+<details>
+
+<summary>src/components/About/About.js</summary>
+
+```jsx
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
+export default class About extends Component {
+
+    render() {
+        return (
+            <div>
+                <div className='subnav'>
+                    <Link to='/about' className='subnav_links'><h3>About</h3></Link>
+                    <Link to='/about/history' className='subnav_links'><h3>History</h3></Link>
+                    <Link to='/about/contact' className='subnav_links'><h3>Contact</h3></Link>                    
+                </div>
+                <div className='box'>
+                </div>
+            </div>
+        )
+    }
+    
+}
+```
+
+</details>
+
+## Step 9
+
+### Summary
+
+We will finish by nesting the routes to the `About`, `History`, and `Contact` components.
+
+### Instructions
+
+* Open `src/components/About/About.js`.
+* Import `Switch` and `Route` from `react-router-dom`.
+* Import the `History` and `Contact` components.
+* Inside the `div` with the className `box`, add a `Switch` component. 
+* Add 2 routes inside the `Switch` component that will render the `History` and `Contact` components. Look to the `Link` components above for the correct paths.
+* Inside that same `Switch`, create a third route. Instead of using a component prop, this will use a `render` prop to render the JSX for the `About` page. Insert the following JSX in the render's function:
+
+<details>
+
+<summary>About JSX</summary>
+
+```jsx
+<div>
+    <h1>About the University</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod eu lorem et ultricies. In porta lorem at dui semper porttitor. Nullam quis cursus dui. Cras tincidunt vehicula tellus eu facilisis. Donec nisi turpis, iaculis et arcu a, aliquet ultrices nisl. Nam in pharetra odio, ac blandit metus. Suspendisse potenti. Praesent elementum diam non orci cursus rutrum. Pellentesque condimentum ultrices dignissim. Sed a tempor ligula, vel luctus sapien. Mauris vehicula rutrum massa. Duis condimentum, ex quis ullamcorper rhoncus, erat libero tempor arcu, condimentum facilisis tellus lectus ut nunc. Pellentesque vitae faucibus diam. Vestibulum eu erat ex. Ut justo neque, varius aliquet erat vel, scelerisque convallis lacus. Mauris semper lorem mauris, sed dignissim eros consectetur nec.</p>
+</div>
+```
+
+</details>
+
+* Make sure to add this route after the History and Contact routes otherwise only the About route will be loaded.
+
+### Solution
+
+<details>
+
+<summary>src/components/About/About.js</summary>
+
+```jsx
+import React, { Component } from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
+import History from '../History/History';
+import Contact from '../Contact/Contact';
+
+export default class About extends Component {
+
+    render() {
+        return (
+            <div>
+                <div className='subnav'>
+                    <Link to='/about' className='subnav_links'><h3>About</h3></Link>
+                    <Link to='/about/history' className='subnav_links'><h3>History</h3></Link>
+                    <Link to='/about/contact' className='subnav_links'><h3>Contact</h3></Link>                    
+                </div>
+                <div className='box'>
+                    <Switch>
+                        <Route path='/about/history' component={ History }/>
+                        <Route path='/about/contact' component={ Contact }/>      
+                        <Route path='/about' render={() => (
+                            <div>
+                                <h1>About the University</h1>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod eu lorem et ultricies. In porta lorem at dui semper porttitor. Nullam quis cursus dui. Cras tincidunt vehicula tellus eu facilisis. Donec nisi turpis, iaculis et arcu a, aliquet ultrices nisl. Nam in pharetra odio, ac blandit metus. Suspendisse potenti. Praesent elementum diam non orci cursus rutrum. Pellentesque condimentum ultrices dignissim. Sed a tempor ligula, vel luctus sapien. Mauris vehicula rutrum massa. Duis condimentum, ex quis ullamcorper rhoncus, erat libero tempor arcu, condimentum facilisis tellus lectus ut nunc. Pellentesque vitae faucibus diam. Vestibulum eu erat ex. Ut justo neque, varius aliquet erat vel, scelerisque convallis lacus. Mauris semper lorem mauris, sed dignissim eros consectetur nec.</p>
+                            </div>
+                        )}/>
+                    </Switch>
+                </div>
+            </div>
+        )
+    }
+    
+}
+```
+
+</details>
+
+## Black Diamond
+
+Try adding a back button on the `Student` detail view that will route back to the `ClassList` view. You can also add a back button to the `ClassList` view that will route back to the `Home` view.
+
+## Contributions
+
+If you see a problem or a typo, please fork, make the necessary changes, and create a pull request so we can review your changes and merge them into the master repo and branch.
+
+## Copyright
+
+© DevMountain LLC, 2017. Unauthorized use and/or duplication of this material without express and written permission from DevMountain, LLC is strictly prohibited. Excerpts and links may be used, provided that full and clear credit is given to DevMountain with appropriate and specific direction to the original content.
+
+<p align="center">
+<img src="https://devmounta.in/img/logowhiteblue.png" width="250">
+</p>

@@ -8,7 +8,7 @@ export default class ClassList extends Component {
 
   render() {
     return (
-      <div>
+      <div className="box">
         <h1></h1>
         <h2>ClassList:</h2>
 
