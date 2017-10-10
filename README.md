@@ -34,6 +34,7 @@ To begin our project, we will be installing the required dependencies and config
 * Install React Router.
 * Create a new file in `src/` named `router.js`.
 * Configure a router in `src/router.js`: 
+    * Import React from `react`.
     * Import `Switch` and `Route` from `react-router-dom`.
     * Import the following components to use as routes:
         * `src/components/Home/Home.js`
