@@ -4,10 +4,10 @@
 
 ![wireframes](readme-assets/wireframes.png)
 
-In this project we will be building a site for a University to keep track of student and class information along with student enrollment. We will be using React Router to navigate between the various views required. Take some time to familiarize yourself with the provided components. 
+In this project we will be building a site for a University to keep track of student information and class enrollment. We will be using React Router to navigate between the various views required. Take some time to familiarize yourself with the provided components. 
 
 * `App` will be the top level component for our application.
-* `Home` will be the home page displayed when the application first loads.
+* `Home` will be the home page displayed when the application first loads. It will also display the available classes.
 * `About` will be the about page displaying information about the University.
     * `History` will be a nested view with the about page and will display the history of the university.
     * `Contact` will be a nested view with the about page and will display the University's contact information.
@@ -16,10 +16,10 @@ In this project we will be building a site for a University to keep track of stu
 
 ## Setup:
 
-* `Fork` and `clone` this repository
-* `cd` into the project
-* Run `npm install`;
-    * One of the packages that was installed was `json-server`. This library will mimic a ReST api and allow you to make http requests for the student data.
+* `fork` and `clone` this repository.
+* `cd` into the project.
+* Run `npm install`.
+    * One of the packages that was installed was `json-server`. This library will mimic a ReST api and allow you to make HTTP requests for the student data that is stored in `db.json`.
 * Run `npm start` to spin up the development server
 * In a separate terminal, run `npm run api` to start the json-server. This step is important, you won't be able to get data through HTTP requests if this is not running.
 
@@ -184,14 +184,14 @@ export default class App extends Component {
 
 ### Summary
 
-In this step, we will be adding a new route for our `ClassList` component. We will also be adding `Link` components in the `Home` page to link to and render the `ClassList` component for each of the listed classes.
+In this step, we will be adding a new route for our `ClassList` component. We will also be adding `Link` components in the `Home` component to link to the `ClassList` route for each of the listed classes.
 
 ### Instructions
 
 * Open `src/router.js`.
 * Import the `ClassList` component to use as a route.
 * The `ClassList` component will need to render the students for that specific class. In order to do this, we will be using params.
-* Create a new route with the path being `/classlist/:class` and the component being the `ClassList` component you previously imported.
+    * Create a new route with the path being `/classlist/:class` and the component being the `ClassList` component you previously imported.
 * Open `src/Home/Home.js`.
 * Import `Link` from `react-router-dom`.
 * Wrap each `button` element with a `Link` component.
@@ -269,16 +269,16 @@ We will now work with our `ClassList` component to display the students enrolled
         * Import `axios` into the `ClassList` component.
     * Create a `componentDidMount` lifecycle hook method.
     * Within this method, make a get request using `axios` to the URL `http://localhost:3005/students?class=`
-        * This URL is incomplete, we need to be getting data for the specific class which is stored in `params`.
-        * Using `params`, add the property value `class` to the ending of the request URL so that the get request will be making a query for the specific class that was selected.
+        * This URL is incomplete, we need to be getting data for the specific class which is stored in the `params` object.
+        * Using the `params` object, add the property value `class` to the ending of the request URL so that the get request will be making a query for the specific class that was selected.
     * Once the data returns, we will need to set `students` in state to the new data.
 * Now that we are receiving the correct data and setting state to the newly received data, we need to display that data.
-    * Creating a new variable named `students` within the render method.
+    * Create a new variable named `students` within the render method.
     * Set the variable `students` equal to the property `students` from state.
     * Now use a `.map()` method on `this.state.students`.
-    * Within the `.map()` method's callback function, return an `h3` tag that renders the JSX for the student's `first_name` and `last_name`. Don't forget to give the element a `key` prop.
-    * Underneath the `h2` tag with `ClassList:`, render the `students` variable.
-* Within the `h1` tags, put the value of class from the `params` object so that we can see the class name that we're looking at.
+    * Within the `.map()` method's callback function, return an `h3` tag that renders the JSX for the student's `first_name` and `last_name`. Don't forget to give the element a unique `key` prop.
+    * Underneath the `h2` tag with `ClassList:`, render the `students` variable JSX.
+* Within the `h1` tags, put the value of the property class from the `params` object so that we can see the class name that we're looking at.
 
 ### Solution
 
@@ -330,18 +330,19 @@ export default class ClassList extends Component {
 
 ### Summary
 
-Now that we are getting the class enrollment list for each class, we will starting setting up the Student detail view.
+Now that we are getting the class student enrollment list for each class, we will start setting up the Student detail view.
 
 ### Instructions
 
 * Open `src/router.js`.
 * Import the `Student` component to use as a route.
 * The `Student` component will need to render the details for a specific student. In order to do this, we will be using params.
-* Create a new route with the path being `/student/:id` and the component being the `Student` component you previously imported.
+    * Create a new route with the path being `/student/:id` and the component being the `Student` component you previously imported.
 * Open `src/components/ClassList/ClassList.js`.
-* Each of the student's names will need to link to the `Student` component passing up the student's id to the url as a parameter.
+* Each of the student's names will need to link to the `Student` component by passing up the student's id to the URL as a parameter.
     * Import `Link` from `react-router-dom`.
     * Inside the callback function for the `.map()` method, wrap the `h3` tag being returned with a `Link` component. Have that `Link` component direct to `/student/${student.id}`.
+    * Don't forget to move the unique `key` prop to the outer most element.
 * You should now be able to navigate from the `ClassList` view to the `Student` detail view.
 
 ### Solution
@@ -417,8 +418,6 @@ export default class ClassList extends Component {
 
 </details>
 
-![student-detail-view](readme-assets/student-detail-view.gif)
-
 ## Step 7
 
 ### Summary
@@ -429,11 +428,11 @@ Using the student's id which was passed as a parameter in the url, we will make 
 
 * Open `src/components/Student/Student.js`.
 * We first need to initialize state.
-    * In the `constructor` method, initialize state with a property named `studentInfo` set to the value of an empty object.
-* We now need to make an HTTP request to our `json-server` to get information for the specific student.
+    * In the `constructor` method, initialize state with a property named `studentInfo` that is set to the value of an empty object.
+* We now need to make an HTTP request to our `json-server` to get the information for the specific student.
     * Import `axios`.
     * Create a `componentDidMount` lifecycle hook method.
-    * Inside of the `componentDidMount` lifecylce hook method, make a get request using `axios` to `http://localhost:3005/students/`. Using `params`, add to the end of the request URL the id that was passed as a parameter.
+    * Inside of the `componentDidMount` lifecylce hook method, make a get request using `axios` to `http://localhost:3005/students/`. Using the `params` object, add to the end of the request URL the id that was passed as a parameter.
     * Update state's `studentInfo` to be the returning data.
 * Now that we have the data for the student, we can display it on the page.
     * Underneath the `h1` tag, display state's `studentInfo` properties:
@@ -484,11 +483,13 @@ export default class Student extends Component {
 
 </details>
 
+![student-detail-view](readme-assets/student-detail-view.gif)
+
 ## Step 8
 
 ### Summary
 
-We now will add the subnav bar that will link to the soon to be nested `About`, `History`, and `Contact` components.
+We now will add a subnav bar that will link to the soon to be nested `About`, `History`, and `Contact` components.
 
 ### Instructions
 
@@ -548,8 +549,8 @@ We will finish by nesting the routes to the `About`, `History`, and `Contact` co
 * Import the `History` and `Contact` components.
 * Inside the `div` with the className `box`, add a `Switch` component. 
 * Add 2 routes inside the `Switch` component that will render the `History` and `Contact` components. Look to the `Link` components above for the correct paths.
-* Inside that same `Switch`, create a third route. Instead of using a component prop, this will use a `render` prop to render the JSX for the `About` page. Insert the following JSX in the render's function:
-
+* Inside that same `Switch` component, create a third route. 
+    * Instead of using a component prop, this will use a `render` prop to render the JSX for the `About` page. Insert the following JSX in the render's function:
 <details>
 
 <summary>About JSX</summary>
