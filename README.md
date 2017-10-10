@@ -76,7 +76,7 @@ In this step, we will take the router we just configured in `src/router.js` and 
 
 * Open `src/index.js`.
 * Import `HashRouter` from `react-router-dom`.
-* Wrap the `Provider` component in a `HashRouter` component.
+* Wrap the `App` component in a `HashRouter` component.
 * Open `src/components/App.js`.
 * Import `router` from `src/router.js`.
 * Underneath the `nav` element render the `router` JSX.
