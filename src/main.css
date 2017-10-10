@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+h1, h2, h3, p {
+  font-family: 'Crimson Text', serif;
+}
+
+.btn {
+  font-size: 20px;
+  height: 85px;
+  width: 250px;
+  margin: 25px auto;
+  border: solid 2px lightgray;
+  background: none;
+  display: block;
+  cursor: pointer;
+  color: #222;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.box {
+  margin: 20px;
+  width: calc(100vw - 140px);
+  height: calc(100% - 135px);
+  border: 2px solid lightgray;
+  padding: 50px;
+}
+
+nav {
+  font-size: 24px;
+  padding: 25px 50px;
+  font-family: 'Crimson Text', serif;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px #222;
+  background: #143A56;
+  color: white;
+  height: 35px;
+}
+
+.subnav {
+  display: flex;
+  justify-content: flex-end;
+  width: calc(100% - 75px);
+  background: lightgray;
+  padding: 0 75px 0 0;
+}
+
+.subnav_links {
+  margin: 0 25px;
+}
+
+a {
+  text-decoration: none;
+  color: #222;
+}
+
+.link-wrap {
+  display: flex;
+}
+
+.links {
+  margin-right: 50px;
+  text-decoration: none;
+  color: white;
+}
+
+.title {
+  text-align: center;
+}
+
+.sub_box {
+  width: 60%;
+  margin: 0 auto;
+}
