@@ -32,15 +32,15 @@ To begin our project, we will be installing additional dependencies required for
 ### Instructions
 
 * Install React Router (`npm install --save react-router-dom`).
-* Create a new file in `src/` named `router.js`.
-* Configure a router in `src/router.js`: 
+* Create a new file in `src/` named `routes.js`.
+* Configure your routes in `src/routes.js`: 
     * Import React from `react`.
     * Import `Switch` and `Route` from `react-router-dom`.
     * Import the following components to use as routes:
         * `src/components/Home/Home.js`
         * `src/components/About/About.js`
     * Create an empty `export default ()` statement.
-    * Use the following combinations of paths and components for your router within the export default parentheses:
+    * Use the following combinations of paths and components for your routes within the export default parentheses:
         * Path: "/" - Component: `Home` - This path should be exact.
         * Path: "/about" - Component: `About`.
 
@@ -48,7 +48,7 @@ To begin our project, we will be installing additional dependencies required for
 
 <details>
 
-<summary>src/router.js</summary>
+<summary>src/routes.js</summary>
 
 ```jsx
 import React from 'react';
@@ -70,7 +70,7 @@ export default (
 
 ### Summary
 
-In this step, we will take the router we just configured in `src/router.js` and add it to our application in `src/index.js`.
+In this step, we will take the routes we just configured in `src/routes.js` and add it to our application in `src/index.js`.
 
 ### Instructions
 
@@ -78,8 +78,8 @@ In this step, we will take the router we just configured in `src/router.js` and 
 * Import `HashRouter` from `react-router-dom`.
 * Wrap the `App` component in a `HashRouter` component.
 * Open `src/App.js`.
-* Import `router` from `./router.js`.
-* Underneath the `nav` element render the `router` JSX.
+* Import `routes` from `./routes.js`.
+* Underneath the `nav` element render the `routes` JSX.
 
 ### Solution
 
@@ -109,7 +109,7 @@ ReactDOM.render(
 
 ```jsx
 import React, { Component } from 'react';
-import router from './router';
+import routes from './routes';
 
 export default class App extends Component {
 
@@ -123,7 +123,7 @@ export default class App extends Component {
                         <div className='links'>About</div> 
                    </div>  
                </nav>
-            { router }
+            { routes }
            </div> 
         )
     }
@@ -157,7 +157,7 @@ In this step, we will be adding links to render our home and about views.
 ```jsx
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import router from './router';
+import routes from './routes';
 
 export default class App extends Component {
 
@@ -171,7 +171,7 @@ export default class App extends Component {
                         <Link to="/about" className='links'>About</Link> 
                    </div>  
                </nav>
-            { router }
+            { routes }
            </div> 
         )
     }
@@ -189,7 +189,7 @@ In this step, we will be adding a new route for our `ClassList` component. We wi
 
 ### Instructions
 
-* Open `src/router.js`.
+* Open `src/routes.js`.
 * Import the `ClassList` component to use as a route.
 * The `ClassList` component will need to render the students for that specific class. In order to do this, we will be using params.
     * Create a new route with the path being `/classlist/:class` and the component being the `ClassList` component you previously imported.
@@ -207,7 +207,7 @@ The `ClassList` component will not be rendering the student enrollment list just
 
 <details>
 
-<summary>src/router.js</summary>
+<summary>src/routes.js</summary>
 
 ```jsx
 import React from 'react';
@@ -335,7 +335,7 @@ Now that we are getting the class student enrollment list for each class, we wil
 
 ### Instructions
 
-* Open `src/router.js`.
+* Open `src/routes.js`.
 * Import the `Student` component to use as a route.
 * The `Student` component will need to render the details for a specific student. In order to do this, we will be using params.
     * Create a new route with the path being `/student/:id` and the component being the `Student` component you previously imported.
@@ -350,7 +350,7 @@ Now that we are getting the class student enrollment list for each class, we wil
 
 <details>
 
-<summary>src/router.js</summary>
+<summary>src/routes.js</summary>
 
 ```jsx
 import React from 'react';
