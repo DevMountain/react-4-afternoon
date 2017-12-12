@@ -27,11 +27,11 @@ In this project we will be building a site for a University to keep track of stu
 
 ### Summary
 
-To begin our project, we will be installing the required dependencies and configuring the router.
+To begin our project, we will be installing additional dependencies required for configuring the router.
 
 ### Instructions
 
-* Install React Router.
+* Install React Router (`npm install --save react-router-dom`).
 * Create a new file in `src/` named `router.js`.
 * Configure a router in `src/router.js`: 
     * Import React from `react`.
@@ -77,8 +77,8 @@ In this step, we will take the router we just configured in `src/router.js` and 
 * Open `src/index.js`.
 * Import `HashRouter` from `react-router-dom`.
 * Wrap the `App` component in a `HashRouter` component.
-* Open `src/components/App.js`.
-* Import `router` from `src/router.js`.
+* Open `src/App.js`.
+* Import `router` from `./router.js`.
 * Underneath the `nav` element render the `router` JSX.
 
 ### Solution
@@ -220,7 +220,7 @@ export default (
   <Switch>
     <Route component={ Home } exact path="/" />
     <Route component={ About } path="/about" />
-    <Route path='/classlist/:class' component={ ClassList } />
+    <Route component={ ClassList } path="/classlist/:class" />
   </Switch>
 )
 ```
@@ -344,7 +344,7 @@ Now that we are getting the class student enrollment list for each class, we wil
     * Import `Link` from `react-router-dom`.
     * Inside the callback function for the `.map()` method, wrap the `h3` tag being returned with a `Link` component. Have that `Link` component direct to `/student/${student.id}`.
     * Don't forget to move the unique `key` prop to the outer most element.
-* You should now be able to navigate from the `ClassList` view to the `Student` detail view.
+* You should now be able to navigate from the `ClassList` view to the `Student` detail view (which will be empty).
 
 ### Solution
 
@@ -364,8 +364,8 @@ export default (
   <Switch>
     <Route component={ Home } exact path="/" />
     <Route component={ About } path="/about" />
-    <Route path='/classlist/:class' component={ ClassList } />
-    <Route path='/student/:id' component={ Student } />
+    <Route component={ ClassList } path='/classlist/:class' />
+    <Route component={ Student } path='/student/:id' />
   </Switch>
 )
 ```
