@@ -4,6 +4,8 @@
 
 ![wireframes](readme-assets/wireframes.png)
 
+View a [live demo of the finished product here](https://apis.devmountain.com/routing).
+
 In this project we will be building a site for a University to keep track of student information and class enrollment. We will be using React Router to navigate between the various views required. Take some time to familiarize yourself with the provided components. 
 
 * `App` will be the top level component for our application.
