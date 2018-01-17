@@ -337,8 +337,6 @@ export default (
 
 <details>
 
-<details>
-
 <summary> <code> ./src/components/Home/Home.js </code> </summary>
 
 ```js
