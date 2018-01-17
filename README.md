@@ -713,7 +713,7 @@ componentDidMount() {
 }
 ```
 
-Now that we have the student data coming in, we can go into the render method and display the pieces of the student's information. Let's put the student's `first_name` and `last_name` within an `h1` tag. Let's put the grade and email in their own `h3` tags.
+Now that we have the student data coming in, we can go into the render method and display the pieces of the student's information. Let's put the student's `first_name` and `last_name` within a `h1` tag and let's put the grade and email in their own `h3` tags.
 
 ```js
 render() {
