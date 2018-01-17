@@ -213,6 +213,8 @@ export default class App extends Component {
 
 </details>
 
+<img src="https://github.com/DevMountain/react-4-afternoon/blob/solution/readme-assets/3.png" />
+
 ## Step 3
 
 ### Summary
