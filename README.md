@@ -842,7 +842,7 @@ In this step, we'll create a sub router that routes to the `About`, `History`, a
 * Add 3 routes inside the `Switch` component:
   * The first two should route the `History` and `Contact` components.
     * Hint: the paths for these components are the same values used in the `to` prop on the `Link` components.
-  * The third route should render the following `JSX` ( instead of a component ) at the path of `/about`. This `path` should also be <b>exact</b>.
+  * The third route should render `JSX` ( instead of a component ) at the <b>exact</b> path of `/about`.
   * To render JSX instead of a component you can use a `render` prop that equals a function that returns JSX.
     * <details>
       
