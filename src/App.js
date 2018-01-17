@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import routes from './routes';
+// import routes from './routes';
 
 export default class App extends Component {
   render() {
@@ -13,7 +13,7 @@ export default class App extends Component {
           </div>
         </nav>
 
-        { routes }
+        { /* routes */ }
       </div>
     )
   }
