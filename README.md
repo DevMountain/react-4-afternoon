@@ -465,7 +465,7 @@ render() {
 }
 ```
 
-We can then use `{ }` the render the `h3` elements under the `h2` element.
+We can then use `{ }` to render the `h3` elements under the `h2` element.
 
 ```js
 render() {
@@ -544,28 +544,27 @@ export default class ClassList extends Component {
 
 ### Summary
 
-Now that we are getting the class student enrollment list for each class, we will start setting up the Student detail view.
+In this step, we will start setting up the a student detail view in the `./src/components/Student/Student.js` component. The `Student` component will need to render any given student, in order to this we'll be using route parameters for a student's ID.
 
 ### Instructions
 
 * Open `src/routes.js`.
 * Import the `Student` component to use as a route.
-* The `Student` component will need to render the details for a specific student. In order to do this, we will be using params.
-    * Create a new route with the path being `/student/:id` and the component being the `Student` component you previously imported.
+* Create a `Student` route with the following properties:
+  * Path: `/student/:id` - Component: `Student`.
 * Open `src/components/ClassList/ClassList.js`.
-* Each of the student's names will need to link to the `Student` component by passing up the student's id to the URL as a parameter.
-    * Import `Link` from `react-router-dom`.
-    * Inside the callback function for the `.map()` method, wrap the `h3` tag being returned with a `Link` component. Have that `Link` component direct to `/student/${student.id}`.
-    * Don't forget to move the unique `key` prop to the outer most element.
-* You should now be able to navigate from the `ClassList` view to the `Student` detail view (which will be empty).
+* Import `Link` from `react-router-dom`.
+* Wrap the `h3` tag with a `Link` component.
+* Assign the `to` prop for the `Link` component to `/student/:id`, where `id` should equal the student's ID.
+  * Remember to move the unique `key` prop to the outer most element of the map.
 
 ### Solution
 
 <details>
 
-<summary>src/routes.js</summary>
+<summary> <code> ./src/routes.js </code> </summary>
 
-```jsx
+```js
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
@@ -587,50 +586,55 @@ export default (
 
 <details>
 
-<summary>src/components/ClassList/ClassList.js</summary>
+<summary> <code> ./src/components/ClassList/ClassList.js </code> </summary>
 
-```jsx
+```js
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default class ClassList extends Component {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.state = {
-            students: []
-        }
-    }
+    this.state = {
+      students: []
+    };
+  }
 
-    componentDidMount() {
-        return axios.get(`http://localhost:3005/students?class=${this.props.match.params.class}`).then(res => {
-            this.setState({
-                students: res.data
-            })
-        })
-    }
+  componentDidMount() {
+    axios.get(`http://localhost:3005/students?class=${ this.props.match.params.class }`).then( results => {
+      this.setState({
+        students: results.data
+      });
+    });
+  }
 
-    render() {
-        const students = this.state.students.map((student, i) => (
-            <Link to={`/student/${student.id}`} key={i}>
-                <h3>{ student.first_name } { student.last_name }</h3>
-            </Link>
-        ))
+  render() {
+    const students = this.state.students.map((student, i) => (
+      <Link to={`/student/${student.id}`} key={ i }>
+        <h3>{ student.first_name } { student.last_name }</h3>
+      </Link>
+    ));
 
-        return (
-            <div className='box'>
-                <h1>{ this.props.match.params.class }</h1>
-                <h2>ClassList:</h2>
-                { students }
-            </div>
-        )
-    }
-
+    return (
+      <div className='box'>
+        <h1>{ this.props.match.params.class }</h1>
+        <h2>ClassList:</h2>
+        { students }
+      </div>
+    )
+  }
 }
 ```
 
 </details>
+
+<br />
+
+<b>Watch how the URL changes when navigating between pages</b>
+
+<img src="https://github.com/DevMountain/react-4-afternoon/blob/solution/readme-assets/7g.gif" />
 
 ## Step 7
 
