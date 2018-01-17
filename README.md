@@ -664,68 +664,70 @@ export default class ClassList extends Component {
 
 ### Summary
 
-Using the student's id which was passed as a parameter in the url, we will make an HTTP request to our `json-server` for that specific student's information. We will display the specific student's information in the `Student` component.
+In this step, we'll update the `Student` component to display a specific student's information. To get this data, we'll look at the `id` route parameter and use it in combination with an `axios` `HTTP` request to our `json-server`.
 
 ### Instructions
 
 * Open `src/components/Student/Student.js`.
-* We first need to initialize state.
-    * In the `constructor` method, initialize state with a property named `studentInfo` that is set to the value of an empty object.
-* We now need to make an HTTP request to our `json-server` to get the information for the specific student.
-    * Import `axios`.
-    * Create a `componentDidMount` lifecycle hook method.
-    * Inside of the `componentDidMount` lifecylce hook method, make a get request using `axios` to `http://localhost:3005/students/`. Using the `params` object, add to the end of the request URL the id that was passed as a parameter.
-    * Update state's `studentInfo` to be the returning data.
-* Now that we have the data for the student, we can display it on the page.
-    * Underneath the `h1` tag, display state's `studentInfo` properties:
-        * `first_name` and `last_name` within an `h1` tag.
-        * The text `Grade:` followed by the `grade` property within an `h3` tag.
-        * The text `Email:` followed by the `email` property within an `h3` tag.
+* Create a `constructor` method that initializes state with a property called `studentInfo`.
+  * `studentInfo` should default to an empty object.
+* Create a `componentDidMount` method that makes an `HTTP` request to the `json-server`:
+  * Import `axios` into the component.
+  * The `json-server` API url is `http://localhost:3005/students/ID_GOES_HERE`.
+    * `ID_GOES_HERE` should equal the student's id.
+    * Hint: `react-router-dom` passes down a `match` object on a component's `props`.
+  * Use the returned data from the API request to update the `studentInfo` object on `state`.
+* Go into the `render` method of the component.
+* Underneath the `h1` tag, display state's `studentInfo` properties:
+  * `first_name` and `last_name` within an `h1` tag.
+  * The text `Grade:` followed by the `grade` property within an `h3` tag.
+  * The text `Email:` followed by the `email` property within an `h3` tag.
 
 ### Solution
 
 <details>
 
-<summary>src/components/Student/Student.js</summary>
+<summary> <code> ./src/components/Student/Student.js </code> </summary>
 
-```jsx
+```js
 import React, { Component } from 'react';
 import axios from 'axios';
 
 export default class Student extends Component {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.state = {
-            studentInfo: {}
-        }
-    }
+    this.state = {
+      studentInfo: {}
+    };
+  }
 
-    componentDidMount() {
-        return axios.get(`http://localhost:3005/students/${this.props.match.params.id}`).then(res => {
-            this.setState({
-                studentInfo: res.data
-            })
-        })
-    }
+  componentDidMount() {
+    return axios.get(`http://localhost:3005/students/${this.props.match.params.id}`).then( results => {
+      this.setState({
+        studentInfo: results.data
+      });
+    });
+  }
     
-    render() {
-
-        return (
-            <div className='box'>
-                <h1>Student:</h1>
-                <h1>{this.state.studentInfo.first_name} {this.state.studentInfo.last_name}</h1>
-                <h3>Grade: {this.state.studentInfo.grade}</h3>
-                <h3>Email: {this.state.studentInfo.email}</h3>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className='box'>
+        <h1>Student:</h1>
+        <h1>{this.state.studentInfo.first_name} {this.state.studentInfo.last_name}</h1>
+        <h3>Grade: {this.state.studentInfo.grade}</h3>
+        <h3>Email: {this.state.studentInfo.email}</h3>
+      </div>
+    )
+  }
 }
 ```
 
 </details>
 
-![student-detail-view](readme-assets/student-detail-view.gif)
+<br />
+
+<img src="https://github.com/DevMountain/react-4-afternoon/blob/solution/readme-assets/8g.gif" />
 
 ## Step 8
 
