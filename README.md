@@ -831,7 +831,7 @@ export default class About extends Component {
 
 ### Summary
 
-In this step, we'll create a sub router that routes to the `About`, `History`, and `Contact` components.
+In this step, we'll create a sub router that routes to the `About`, `History`, and `Contact` components. This step will avoid using `detailed instructions` to provided a little bit of challenge. Use what you've learned from the previous steps to accomplish this one. If you get stuck, you can look at the `solution code`.
 
 ### Instructions
 
@@ -842,7 +842,8 @@ In this step, we'll create a sub router that routes to the `About`, `History`, a
 * Add 3 routes inside the `Switch` component:
   * The first two should route the `History` and `Contact` components.
     * Hint: the paths for these components are the same values used in the `to` prop on the `Link` components.
-  * The third route should render the following `JSX` ( instead of a component ) at the path of `/about`. This `path` should also be <b>exact</b>:
+  * The third route should render the following `JSX` ( instead of a component ) at the path of `/about`. This `path` should also be <b>exact</b>.
+  * To render JSX instead of a component you can use a `render` prop that equals a function that returns JSX.
     * <details>
       
       <summary> <code> About JSX </code> </summary>
