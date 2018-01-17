@@ -2,7 +2,7 @@
 
 # Project Summary
 
-In this project we will be building a site for a University to keep track of student information and class enrollment. We will be using React Router to navigate between the various views required. Take some time to familiarize yourself with the provided components. 
+In this project we will be building a site for a University to keep track of student information and class enrollment. We will be using React Router to navigate between the various views. Take some time to familiarize yourself with the provided components. 
 
 * `App` will be the top level component for our application.
 * `Home` will be the home page displayed when the application first loads. It will also display the available classes.
@@ -24,11 +24,11 @@ In this project we will be building a site for a University to keep track of stu
 * `cd` into the project.
 * Run `npm install`.
     * One of the packages that was installed is `json-server`.
-    * This library will mimic a REST api and allow you to make HTTP requests for the student data that is stored in `./db.json`.
+    * This library will mimic a REST api and allow you to make HTTP requests for the student data.
+      * This data is stored in `./db.json`.
     * Another package that was installed for you is `concurrently`.
     * This library will allow us to run multiple scripts in a single terminal window ( the development server and database ).
-* Run `npm start` to spin up the development server.
-  * We are using a package called `concurrently` that is also running a `json-server` for you at the same time.
+* Run `npm start` to spin up the development server AND the `json-server`.
 
 ## Step 1
 
