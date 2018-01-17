@@ -780,52 +780,52 @@ export default class Student extends Component {
 
 ### Summary
 
-We now will add a subnav bar that will link to the soon to be nested `About`, `History`, and `Contact` components.
+In this step, we'll add a sub nav bar that will link to the soon to be nested `About`, `History`, and `Contact` components.
 
 ### Instructions
 
 * Open `src/components/About/About.js`.
 * Import `Link` from `react-router-dom`.
 * Inside the `div` with the className `subnav`, add 3 `h3` tags with the text:
-    * `About`
-    * `History`
-    * `Contact`
+  * `About`
+  * `History`
+  * `Contact`
 * Wrap each `h3` tag with a `Link` component that links the following paths:
-    * About - `/about`
-    * History - `/about/history`
-    * Contact - `/about/contact`
+  * About - `/about`
+  * History - `/about/history`
+  * Contact - `/about/contact`
 * Give each of these `Link` components the className `subnav_links`.
 
 ### Solution
 
 <details>
 
-<summary>src/components/About/About.js</summary>
+<summary> <code> ./src/components/About/About.js </code> </summary>
 
-```jsx
+```js
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export default class About extends Component {
-
-    render() {
-        return (
-            <div>
-                <div className='subnav'>
-                    <Link to='/about' className='subnav_links'><h3>About</h3></Link>
-                    <Link to='/about/history' className='subnav_links'><h3>History</h3></Link>
-                    <Link to='/about/contact' className='subnav_links'><h3>Contact</h3></Link>                    
-                </div>
-                <div className='box'>
-                </div>
-            </div>
-        )
-    }
-    
-}
+  render() {
+    return (
+      <div>
+        <div className='subnav'>
+          <Link to='/about' className='subnav_links'><h3>About</h3></Link>
+          <Link to='/about/history' className='subnav_links'><h3>History</h3></Link>
+          <Link to='/about/contact' className='subnav_links'><h3>Contact</h3></Link>
+        </div>
+        <div className='box'>
+        </div>
+      </div>
+    )
+  }
+} 
 ```
 
 </details>
+
+<img src="https://github.com/DevMountain/react-4-afternoon/blob/solution/readme-assets/9.png" />
 
 ## Step 9
 
