@@ -27,8 +27,8 @@ In this project we will be building a site for a University to keep track of stu
     * This library will mimic a REST api and allow you to make HTTP requests for the student data.
       * This data is stored in `./db.json`.
     * Another package that was installed for you is `concurrently`.
-    * This library will allow us to run multiple scripts in a single terminal window ( the development server and database ).
-* Run `npm start` to spin up the development server AND the `json-server`.
+    * This library will allow us to run multiple scripts in a single terminal window.
+* Run `npm start` to spin up the development server <b>AND</b> the `json-server`.
 
 ## Step 1
 
