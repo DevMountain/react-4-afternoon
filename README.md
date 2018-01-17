@@ -307,7 +307,27 @@ In this step, we will be adding a new route for our `ClassList` component. We wi
 
 <br />
 
+Let's begin by opening `src/routes.js` and importing the `ClassList` at the top of the file with the other imported components. For this component we are going to make use of routing parameters. This will allow us to use a single component that can know what dataset to load by looking at the route. For example: the math parameter will be MATH1010, when the component loads and reads `MATH1010` we can select all the students from `db.json` with the class of `MATH1010`. If that doesn't make sense entirely don't worry, we'll go into more detail in later steps.
 
+For now let's add a new route that uses a path of `/classlist/:class` and uses a component of `ClassList`. The `:class` indicates a route parameter called `class` in the url. We'll cover how to access the route parameter in a later step.
+
+```js
+<Route component={ ClassList } path="/classlist/:class" />
+```
+
+Now that we have our new route setup in `./src/routes.js`, let's open up `./src/components/Home/Home.js` and import `Link` from `react-router-dom` at the top of the file. The `Home` component renders three buttons for the classes, let's update those buttons to be wrapped in a `Link` component. For Math, we'll want to route `/classlist/MATH1010`. For English, we'll want to route to `/classlist/ENG2010`. And for Biology, we'll want to route to `/classlist/BIO2020`. If you're wondering why it's specifically `MATH1010`, `ENG2010`, and `BIO2020`; it's so that we can map over the `db.json` and make a `class` match. A student's `class` property will equal one of those three strings.
+
+```js
+render() {
+  return (
+    <div className="box">
+      <Link to='/classlist/MATH1010'><button className='btn'>Math 1010</button></Link>
+      <Link to='/classlist/ENG2010'><button className='btn'>English 2010</button></Link>
+      <Link to='/classlist/BIO2020'><button className='btn'>Biology 2020</button></Link>
+    </div>
+  );
+}
+```
 
 </details>
 
@@ -369,7 +389,7 @@ export default class Home extends Component {
 
 ### Summary
 
-We will now work with our `ClassList` component to display the students enrolled for that specific class. To get this data, we will be making an HTTP call to our `json-server`.
+In this step, we will now work with our `ClassList` component to display the students enrolled for that specific class. To get this data, we will be making an HTTP call to our `json-server`.
 
 ### Instructions
 
