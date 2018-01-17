@@ -34,22 +34,56 @@ In this project we will be building a site for a University to keep track of stu
 
 ### Summary
 
-To begin our project, we will be installing additional dependencies required for configuring the router.
+In this step, we'll be installing additional dependencies required for configuring a react router. We'll then create a router for the project.
 
 ### Instructions
 
 * Install React Router (`npm install --save react-router-dom`).
-* Create a new file in `src/` named `routes.js`.
-* Configure your routes in `src/routes.js`: 
-    * Import React from `react`.
-    * Import `Switch` and `Route` from `react-router-dom`.
-    * Import the following components to use as routes:
-        * `src/components/Home/Home.js`
-        * `src/components/About/About.js`
-    * Create an empty `export default ()` statement.
-    * Use the following combinations of paths and components for your routes within the export default parentheses:
-        * Path: "/" - Component: `Home` - This path should be exact.
-        * Path: "/about" - Component: `About`.
+* Create a new file in `./src` called `routes.js` and open it.
+* Configure a router in this file: 
+  * Use the following components as routes:
+    * `src/components/Home/Home.js`
+    * `src/components/About/About.js`
+  * Use the following combinations of paths and components for your routes:
+    * Path: "/" - Component: `Home` - This path should be exact.
+    * Path: "/about" - Component: `About`.
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+Let's begin by installing the `react-router-dom` package. This will allow us to use routing in a react application. We can install it by running `npm install --save react-router-dom` in a terminal. Make sure the terminal is `cd` into the root project directory.
+
+Now that we have `react-router-dom`, let's create a JavaScript file that will hold all of our routes. In `.src/`, let's make a new file called `routes.js`. At the top of this file we'll need to import `React` from `react` and also import `Switch` and `Route` from `react-router-dom`.
+
+```js
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+```
+
+We'll also want to import the components that we want the user to be able to route to. In this case, let's import the `Home` and `About` component.
+
+```js
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Home from './components/Home/Home';
+import About from './components/About/About';
+```
+
+Now that we have all of our dependencies in `routes.js`, we can use an `export default` statement to export a router. We'll need an `exact` route at `/` to load the `Home` component and a route at `/about` to load the `About` component.
+
+```js
+export default (
+  <Switch>
+    <Route component={ Home } exact path="/" />
+    <Route component={ About } path="/about" />
+  </Switch>
+)
+```
+
+</details>
 
 ### Solution
 
