@@ -839,7 +839,7 @@ In this step, we'll create a sub router that routes to the `About`, `History`, a
 * Import `Switch` and `Route` from `react-router-dom`.
 * Import the `History` and `Contact` components.
 * Inside the `div` with the className `box`, add a `Switch` component.
-* Add 3 routes inside the `Switch` component that will render the `History` and `Contact` components.
+* Add 3 routes inside the `Switch` component:
   * The first two should route the `History` and `Contact` components.
     * Hint: the paths for these components are the same values used in the `to` prop on the `Link` components.
   * The third route should render the following `JSX` ( instead of a component ) at the path of `/about`. This `path` should also be <b>exact</b>:
