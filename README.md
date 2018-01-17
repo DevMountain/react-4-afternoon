@@ -42,8 +42,8 @@ In this step, we'll be installing additional dependencies required for configuri
 * Create a new file in `./src` called `routes.js` and open it.
 * Configure a router in this file: 
   * Use the following components as routes:
-    * `src/components/Home/Home.js`
-    * `src/components/About/About.js`
+    * `./src/components/Home/Home.js`
+    * `./src/components/About/About.js`
   * Use the following combinations of paths and components for your routes:
     * Path: "/" - Component: `Home` - This path should be exact.
     * Path: "/about" - Component: `About`.
@@ -89,9 +89,9 @@ export default (
 
 <details>
 
-<summary>src/routes.js</summary>
+<summary> <code> ./src/routes.js </code> </summary>
 
-```jsx
+```js
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
