@@ -564,13 +564,13 @@ In this step, we will start setting up the a student detail view in the `./src/c
 
 <br />
 
-Let's begin by opening `./src/routes.js` and `import` the `Student` component at the top of the file witht he other components. We'll need to make a new route for this `Student` component that uses an `id` route parameter. Similarly to how we did it with the `ClassList` component, we can use `axios` to fetch a specific student on load by making a match the `id`. For example, if `id` equaled `1` we could fetch a student where the `id` equaled `1`. The `path` for this route should be `/student/:id`.
+Let's begin by opening `./src/routes.js` and `import` the `Student` component at the top of the file with the other components. We'll need to make a new route for this `Student` component that uses an `id` route parameter. Similarly to how we did it with the `ClassList` component, we can use `axios` to fetch a specific student on load by making a match to the `id` property. For example, if `id` equaled `1` we could fetch a student where the `id` equaled `1`. The `path` for this route should be `/student/:id`.
 
 ```js
 <Route component={ Student } path='/student/:id' />
 ```
 
-Now that we have our `Student` route setup, let's open the `ClassList` component `import` the `Link` component from `react-router-dom`. We'll need to update our `map` in the `render` method to wrap the `h3` element in a `Link` component. In this `map`, we have access to all the student's properties. Therefore, if we need the `id`, we can access it by `student.id`. Let's set the `to` prop of the `Link` component to be `/student/${ student.id }`. We'll also need to move the `key` prop onto the `Link` component since it'll now be the most parent item.
+Now that we have our `Student` route setup, let's open the `ClassList` component and `import` the `Link` component from `react-router-dom`. We'll need to update our `map` in the `render` method to wrap the `h3` element in a `Link` component. In this `map`, we have access to all the student's properties. Therefore, if we need the `id`, we can access it by `student.id`. Let's set the `to` prop of the `Link` component to be `/student/${ student.id }`. We'll also need to move the `key` prop onto the `Link` component since it'll now be the most parent item.
 
 ```js
 const students = this.state.students.map((student, i) => (
