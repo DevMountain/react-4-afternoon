@@ -683,6 +683,53 @@ In this step, we'll update the `Student` component to display a specific student
   * The text `Grade:` followed by the `grade` property within an `h3` tag.
   * The text `Email:` followed by the `email` property within an `h3` tag.
 
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+Let's begin by opening `src/components/Student/Student.js` and import `axios` at the top of the file with the other imports. We'll need a place to store our data from hitting the API, let's update the constructor method to have a property called `studentInfo` that defaults to an empty object.
+
+```js
+constructor() {
+  super();
+
+  this.state = {
+    studentInfo: {}
+  };
+}
+```
+
+Now that we have somewhere to store the data, let's create a `componentDidMount` method. Inside this method let's use `axios` to make a `GET` request to `http://localhost:3005/students/ID_GOES_HERE`. Similarly to `ClassList`, we can access the `id` for the given student on the `match` object that `react-router-dom` passes into our routeable components. Therefore, our API url would look like: `http://localhost:3005/students/${this.props.match.params.id}`. Let's capture the results of this `GET` request and use the data to update the value of `studentInfo` on `state`.
+
+```js
+componentDidMount() {
+  return axios.get(`http://localhost:3005/students/${this.props.match.params.id}`).then( results => {
+    this.setState({
+      studentInfo: results.data
+    });
+  });
+}
+```
+
+Now that we have the student data coming in, we can go into the render method and display the pieces of the student's information. Let's put the student's `first_name` and `last_name` within an `h1` tag. Let's put the grade and email in their own `h3` tags.
+
+```js
+render() {
+  return (
+    <div className='box'>
+      <h1>Student:</h1>
+      <h1>{this.state.studentInfo.first_name} {this.state.studentInfo.last_name}</h1>
+      <h3>Grade: {this.state.studentInfo.grade}</h3>
+      <h3>Email: {this.state.studentInfo.email}</h3>
+    </div>
+  )
+}
+```
+
+</details>
+
 ### Solution
 
 <details>
