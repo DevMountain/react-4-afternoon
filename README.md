@@ -361,6 +361,8 @@ export default class Home extends Component {
 
 <br />
 
+<b>Watch how the URL changes when navigating between pages</b>
+
 <img src="https://github.com/DevMountain/react-4-afternoon/blob/solution/readme-assets/5g.gif" />
 
 ## Step 5
