@@ -678,7 +678,7 @@ In this step, we'll update the `Student` component to display a specific student
     * Hint: `react-router-dom` passes down a `match` object on a component's `props`.
   * Use the returned data from the API request to update the `studentInfo` object on `state`.
 * Go into the `render` method of the component.
-* Underneath the `h1` tag, display state's `studentInfo` properties:
+* Underneath the `h1` tag, display `studentInfo` properties off of `state`:
   * `first_name` and `last_name` within an `h1` tag.
   * The text `Grade:` followed by the `grade` property within an `h3` tag.
   * The text `Email:` followed by the `email` property within an `h3` tag.
