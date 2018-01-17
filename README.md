@@ -464,6 +464,10 @@ export default class ClassList extends Component {
 
 </details>
 
+<br />
+
+<img src="https://github.com/DevMountain/react-4-afternoon/blob/solution/readme-assets/6g.gif" />
+
 ## Step 6
 
 ### Summary
