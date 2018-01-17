@@ -15,5 +15,4 @@ export default class ClassList extends Component {
       </div>
     )
   }
-    
 }
