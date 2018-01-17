@@ -2,28 +2,33 @@
 
 # Project Summary
 
-![wireframes](readme-assets/wireframes.png)
-
-View a [live demo of the finished product here](https://apis.devmountain.com/routing).
-
 In this project we will be building a site for a University to keep track of student information and class enrollment. We will be using React Router to navigate between the various views required. Take some time to familiarize yourself with the provided components. 
 
 * `App` will be the top level component for our application.
 * `Home` will be the home page displayed when the application first loads. It will also display the available classes.
 * `About` will be the about page displaying information about the University.
-    * `History` will be a nested view with the about page and will display the history of the university.
-    * `Contact` will be a nested view with the about page and will display the University's contact information.
+  * `History` will be a nested view with the about page and will display the history of the university.
+  * `Contact` will be a nested view with the about page and will display the University's contact information.
 * `ClassList` will display all the enrolled students for that specific class.
 * `Student` will be the detail view for a particular student.
 
-## Setup:
+# Live Example
+
+<a href="https://apis.devmountain.com/routing">Click Me!</a>
+
+![wireframes](readme-assets/wireframes.png)
+
+## Setup
 
 * `fork` and `clone` this repository.
 * `cd` into the project.
 * Run `npm install`.
-    * One of the packages that was installed was `json-server`. This library will mimic a ReST api and allow you to make HTTP requests for the student data that is stored in `db.json`.
-* Run `npm start` to spin up the development server
-* In a separate terminal, run `npm run api` to start the json-server. This step is important, you won't be able to get data through HTTP requests if this is not running.
+    * One of the packages that was installed is `json-server`.
+    * This library will mimic a REST api and allow you to make HTTP requests for the student data that is stored in `./db.json`.
+    * Another package that was installed for you is `concurrently`.
+    * This library will allow us to run multiple scripts in a single terminal window ( the development server and database ).
+* Run `npm start` to spin up the development server.
+  * We are using a package called `concurrently` that is also running a `json-server` for you at the same time.
 
 ## Step 1
 
