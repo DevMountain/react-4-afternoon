@@ -415,7 +415,79 @@ In this step, we will update the `ClassList` component to display the students e
 
 <br />
 
+Let's begin by opening `./src/components/ClassList/ClassList.js`. In the `constructor` method, let's initialize `state` to have a property called `students` that equals an empty array. This is where we'll store our returned data from hitting the `json-server`. 
 
+```js
+constructor() {
+  super();
+
+  this.state = {
+    students: []
+  };
+}
+```
+
+Now that we have somewhere to store our API results, let's focus on the code to actually make the API request. First, we'll need `axios`. Let's use `npm install --save axios` to add it to our project and also `import` it at the top of our component. After that, let's create a `componentDidMount` lifecycle method. This will allow us to get our students as soon as possible. 
+
+```js
+componentDidMount() {
+
+}
+```
+
+Since we are `fetching` data, let's make a `GET` request to the API url: `http://localhost:3005/students?class=` where class equals the current class page. `react-router-dom` automatically passes down a couple handy props into the routeable components. One of them is called `match`. It is an object with a bunch of useful information. One of the properties on `match` is called `params`. This is where we can see the value of any `route parameters`. Our route parameter is called `class`. Therefore, we can access it by using `this.props.match.params.class`. 
+
+That means our `GET` request url should look like: `http://localhost:3005/students?class=${ this.props.match.params.class }`. We can then capture the results of this API request and use `setState` to update the value of `students` to be the result's data.
+
+```js
+axios.get(`http://localhost:3005/students?class=${ this.props.match.params.class }`).then( results => {
+  this.setState({
+    students: results.data
+  });
+});
+```
+
+Now that we have our students coming in from our `json-server`, let's use a `map` in the render method to render each student's `first` and `last` name in a `h3` element. Remember the react requires mapped elements to have a unique `key` property. In this case, we'll just use the `index` of the `map`.
+
+```js
+render() {
+  const students = this.state.students.map((student, i) => (
+    <h3 key={ i }>{ student.first_name } { student.last_name }</h3>
+  ));
+
+  return (
+    <div className='box'>
+      <h1></h1>
+      <h2>ClassList:</h2>
+
+    </div>
+  )
+}
+```
+
+We can then use `{ }` the render the `h3` elements under the `h2` element.
+
+```js
+render() {
+  const students = this.state.students.map((student, i) => (
+    <h3 key={ i }>{ student.first_name } { student.last_name }</h3>
+  ));
+
+  return (
+    <div className='box'>
+      <h1></h1>
+      <h2>ClassList:</h2>
+      { students }
+    </div>
+  )
+}
+```
+
+Lastly, we just need to update the `h1` element to display the current class. Just like how we accessed the route parameter for our `axios` request, we can do the same thing here using `{ }` in our JSX.
+
+```js
+<h1>{ this.props.match.params.class }</h1>
+```
 
 </details>
 
@@ -439,7 +511,7 @@ export default class ClassList extends Component {
   }
 
   componentDidMount() {
-    return axios.get(`http://localhost:3005/students?class=${ this.props.match.params.class }`).then( results => {
+    axios.get(`http://localhost:3005/students?class=${ this.props.match.params.class }`).then( results => {
       this.setState({
         students: results.data
       });
