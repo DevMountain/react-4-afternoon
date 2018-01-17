@@ -307,7 +307,7 @@ In this step, we will be adding a new route for our `ClassList` component. We wi
 
 <br />
 
-Let's begin by opening `src/routes.js` and importing the `ClassList` at the top of the file with the other imported components. For this component we are going to make use of routing parameters. This will allow us to use a single component that can know what dataset to load by looking at the route. For example: the math parameter will be MATH1010, when the component loads and reads `MATH1010` we can select all the students from `db.json` with the class of `MATH1010`. If that doesn't make sense entirely don't worry, we'll go into more detail in later steps.
+Let's begin by opening `src/routes.js` and importing the `ClassList` at the top of the file with the other imported components. For this component, we are going to make use of routing parameters. This will allow us to use a single component that can know what dataset to load by looking at the parameter. For example: the math parameter will be `MATH1010`, when the component loads and reads `MATH1010` we can select all the students from `db.json` with the class of `MATH1010`. If that doesn't make sense entirely don't worry, we'll go into more detail in later steps.
 
 For now let's add a new route that uses a path of `/classlist/:class` and uses a component of `ClassList`. The `:class` indicates a route parameter called `class` in the url. We'll cover how to access the route parameter in a later step.
 
@@ -389,71 +389,76 @@ export default class Home extends Component {
 
 ### Summary
 
-In this step, we will now work with our `ClassList` component to display the students enrolled for that specific class. To get this data, we will be making an HTTP call to our `json-server`.
+In this step, we will update the `ClassList` component to display the students enrolled for that specific class. To get this data, we will look at what the `class` route parameter equals an make a `HTTP` request to our `json-server`.
 
 ### Instructions
 
 * Open `src/components/ClassList/ClassList.js`.
-* We first need to initialize state for this component.
-    * Within the `constructor` method, initialize state with a property named `students` set to the value of an empty array.
-* Now we will be making an HTTP request to get the student enrollment data for the specific class.
-    * We will be using `axios` to make our HTTP request.
-        * Install the package `axios`.
-        * Import `axios` into the `ClassList` component.
-    * Create a `componentDidMount` lifecycle hook method.
-    * Within this method, make a get request using `axios` to the URL `http://localhost:3005/students?class=`
-        * This URL is incomplete, we need to be getting data for the specific class which is stored in the `params` object.
-        * Using the `params` object, add the property value `class` to the ending of the request URL so that the get request will be making a query for the specific class that was selected.
-    * Once the data returns, we will need to set `students` in state to the new data.
-* Now that we are receiving the correct data and setting state to the newly received data, we need to display that data.
-    * Create a new variable named `students` within the render method.
-    * Set the variable `students` equal to the property `students` from state.
-    * Now use a `.map()` method on `this.state.students`.
-    * Within the `.map()` method's callback function, return an `h3` tag that renders the JSX for the student's `first_name` and `last_name`. Don't forget to give the element a unique `key` prop.
-    * Underneath the `h2` tag with `ClassList:`, render the `students` variable JSX.
-* Within the `h1` tags, put the value of the property class from the `params` object so that we can see the class name that we're looking at.
+* Create a constructor method that initializes state with a property called `students`.
+  * `students` should default to an empty array.
+* Create a `componentDidMount` method that makes a `HTTP` request to the `json-server`:
+  * Install `axios` and `import` it into the component.
+  * The `json-server` API url is `http://localhost:3005/students?class=`.
+    * Class should equal `MATH1010` OR `ENG2010` OR `BIO2020` depending on the route parameter.
+    * Hint: `react-router-dom` passes down a `match` object on a component's `props`.
+  * Use the returned data from the API request to update the `students` array on `state`.
+* Go into the `render` method of the component.
+* `map` over the students and return an `h3` tag of the students `first` and `last` name.
+  * Remember react requires a unique `key` prop on mapped elements.
+* Undearneath the `h2` tag, render the `mapped` over students.
+* Update the `h1` tag to display the page's class name.
+  * Hint: `react-router-dom` passes down a `match` object on a component's `props`.
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+
+
+</details>
 
 ### Solution
 
 <details>
 
-<summary>src/components/ClassList/ClassList.js</summary>
+<summary> <code> ./src/components/ClassList/ClassList </code> </summary>
 
-```jsx
+```js
 import React, { Component } from 'react';
 import axios from 'axios';
 
 export default class ClassList extends Component {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.state = {
-            students: []
-        }
-    }
+    this.state = {
+      students: []
+    };
+  }
 
-    componentDidMount() {
-        return axios.get(`http://localhost:3005/students?class=${this.props.match.params.class}`).then(res => {
-            this.setState({
-                students: res.data
-            })
-        })
-    }
+  componentDidMount() {
+    return axios.get(`http://localhost:3005/students?class=${ this.props.match.params.class }`).then( results => {
+      this.setState({
+        students: results.data
+      });
+    });
+  }
 
-    render() {
-        const students = this.state.students.map((student, i) => (
-            <h3 key={i}>{ student.first_name } { student.last_name }</h3>
-        ))
+  render() {
+    const students = this.state.students.map((student, i) => (
+      <h3 key={ i }>{ student.first_name } { student.last_name }</h3>
+    ));
 
-        return (
-            <div className='box'>
-                <h1>{ this.props.match.params.class }</h1>
-                <h2>ClassList:</h2>
-                { students }
-            </div>
-        )
-    }
-
+    return (
+      <div className='box'>
+        <h1>{ this.props.match.params.class }</h1>
+        <h2>ClassList:</h2>
+        { students }
+      </div>
+    )
+  }
 }
 ```
 
