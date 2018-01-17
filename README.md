@@ -111,14 +111,14 @@ export default (
 
 ### Summary
 
-In this step, we will take the routes we just configured in `src/routes.js` and add it to our application in `src/index.js`.
+In this step, we will take the routes we just configured in `./src/routes.js` and add it to our application in `./src/index.js`.
 
 ### Instructions
 
-* Open `src/index.js`.
+* Open `./src/index.js`.
 * Import `HashRouter` from `react-router-dom`.
 * Wrap the `App` component in a `HashRouter` component.
-* Open `src/App.js`.
+* Open `./src/App.js`.
 * Import `routes` from `./routes.js`.
 * Underneath the `nav` element render the `routes` JSX.
 
@@ -126,9 +126,9 @@ In this step, we will take the routes we just configured in `src/routes.js` and 
 
 <details>
 
-<summary>src/index.js</summary>
+<summary> <code> ./src/index.js </code> </summary>
 
-```jsx
+```js
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom';
@@ -136,9 +136,9 @@ import './main.css';
 import App from './App';
 
 ReactDOM.render(
-    <HashRouter>
-      <App />
-    </HashRouter>
+  <HashRouter>
+    <App />
+  </HashRouter>
 , document.getElementById('root'));
 ```
 
@@ -146,29 +146,28 @@ ReactDOM.render(
 
 <details>
 
-<summary>src/App.js</summary>
+<summary> <code> ./src/App.js </code> </summary>
 
-```jsx
+```js
 import React, { Component } from 'react';
 import routes from './routes';
 
 export default class App extends Component {
+  render() {
+    return (
+      <div>
+        <nav className='nav'>
+          <div>WestSide University</div> 
+          <div className='link-wrap'>
+            <div className='links'>Home</div>
+            <div className='links'>About</div> 
+          </div>
+        </nav>
 
-    render() {
-        return (
-           <div>
-               <nav className='nav'>
-                   <div>WestSide University</div> 
-                   <div className='link-wrap'>
-                        <div className='links'>Home</div>
-                        <div className='links'>About</div> 
-                   </div>  
-               </nav>
-            { routes }
-           </div> 
-        )
-    }
-
+        { routes }
+      </div>
+    )
+  }
 }
 ```
 
