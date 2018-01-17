@@ -122,6 +122,44 @@ In this step, we will take the routes we just configured in `./src/routes.js` an
 * Import `routes` from `./routes.js`.
 * Underneath the `nav` element render the `routes` JSX.
 
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+Let's begin by opening `./src/index.js` and importing `HashRouter` from `react-router-dom` at the top of the component. We'll need to wrap our react application with this `HashRouter` component in order for routing to work.
+
+```js
+ReactDOM.render(
+  <HashRouter>
+    <App />
+  </HashRouter>
+, document.getElementById('root'));
+```
+
+Now that our application is wrapped with `HashRouter`, we can render our router any where in the app. Let's open `./src/App.js` and import `./src/routes.js` at the top of the file. Then, in the `render` method, let's render our routes underneath the `nav` element.
+
+```js
+render() {
+  return (
+    <div>
+      <nav className='nav'>
+        <div>WestSide University</div> 
+        <div className='link-wrap'>
+          <div className='links'>Home</div>
+          <div className='links'>About</div> 
+        </div>
+      </nav>
+
+      { routes }
+    </div>
+  )
+}
+```
+
+</details>
+
 ### Solution
 
 <details>
