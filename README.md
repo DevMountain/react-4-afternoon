@@ -285,31 +285,39 @@ export default class App extends Component {
 
 ### Summary
 
-In this step, we will be adding a new route for our `ClassList` component. We will also be adding `Link` components in the `Home` component to link to the `ClassList` route for each of the listed classes.
+In this step, we will be adding a new route for our `ClassList` component. We will also be adding `Link` components in the `Home` component to link to the `ClassList` route for each of the listed classes ( Math, English, and Biology ). The `ClassList` component will need to render students for a specific class, in order to do this we'll be using route params.
 
 ### Instructions
 
 * Open `src/routes.js`.
 * Import the `ClassList` component to use as a route.
-* The `ClassList` component will need to render the students for that specific class. In order to do this, we will be using params.
-    * Create a new route with the path being `/classlist/:class` and the component being the `ClassList` component you previously imported.
+* Create a `ClassList` route with the following properties:
+  * Path: `/classlist/:class` - Component: `ClassList`.
 * Open `src/Home/Home.js`.
 * Import `Link` from `react-router-dom`.
 * Wrap each `button` element with a `Link` component.
-* Each link should direct to the path `/classlist` with the class name added to the path ending.
-    * Math 1010 - `/classlist/MATH1010`
-    * English 2010 - `/classlist/ENG2010`
-    * Biology 2020 - `/classlist/BIO2020`
+* Each link should direct to the path `/classlist` with the class parameter.
+  * Math 1010 - `/classlist/MATH1010`
+  * English 2010 - `/classlist/ENG2010`
+  * Biology 2020 - `/classlist/BIO2020`
 
-The `ClassList` component will not be rendering the student enrollment list just yet, we will be doing that in the next step.
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+
+
+</details>
 
 ### Solution
 
 <details>
 
-<summary>src/routes.js</summary>
+<summary> <code> ./src/routes.js </code> </summary>
 
-```jsx
+```js
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
@@ -325,13 +333,15 @@ export default (
 )
 ```
 
-</details> 
+</details>
 
 <details>
 
-<summary>src/Home/Home.js</summary>
+<details>
 
-```jsx
+<summary> <code> ./src/components/Home/Home.js </code> </summary>
+
+```js
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -351,7 +361,9 @@ export default class Home extends Component {
 
 </details>
 
-![home-view](readme-assets/home-view.png)
+<br />
+
+<img src="https://github.com/DevMountain/react-4-afternoon/blob/solution/readme-assets/5g.gif" />
 
 ## Step 5
 
