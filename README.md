@@ -226,42 +226,60 @@ In this step, we will be adding links to render our home and about views.
 * Open `src/App.js`.
 * Import `Link` from `react-router-dom`.
 * Locate the `div` elements with className of links.
-    * Replace the `div` elements to be `Link` components.
-    * The Home link should be sent to `/`.
-    * The About link should be sent to `/about`.
+  * Replace the `div` elements to be `Link` components.
+  * The Home link should be sent to `/`.
+  * The About link should be sent to `/about`.
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+Let's begin by opening `src/App.js` and importing `Link` from `react-router-dom` at the top of the file. The `Link` component will allow us to add clickable links into the DOM so the user can navigate the application. There are two `div` elements with the classname of `links`. Let's replace the `div` to be `Link` with the same classname. The `Link` component uses a `to` prop to determine which route to navigate to. For the home route, we'll want to use `/`, and for the about route, we'll want to use `/about`.
+
+```js
+<Link to="/" className='links'>Home</Link>
+<Link to="/about" className='links'>About</Link> 
+```
+
+</details>
 
 ### Solution
 
 <details>
 
-<summary>src/App.js</summary>
+<summary> <code> ./src/App.js </code> </summary>
 
-```jsx
+```js
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import routes from './routes';
 
 export default class App extends Component {
+  render() {
+    return (
+      <div>
+        <nav className='nav'>
+          <div>WestSide University</div> 
+          <div className='link-wrap'>
+            <Link to="/" className='links'>Home</Link>
+            <Link to="/about" className='links'>About</Link>
+          </div>
+        </nav>
 
-    render() {
-        return (
-           <div>
-               <nav className='nav'>
-                   <div>WestSide University</div> 
-                   <div className='link-wrap'>
-                        <Link to="/" className='links'>Home</Link>
-                        <Link to="/about" className='links'>About</Link> 
-                   </div>  
-               </nav>
-            { routes }
-           </div> 
-        )
-    }
-
+        { routes }
+      </div>
+    )
+  }
 }
 ```
 
 </details>
+
+<br />
+
+<img src="https://github.com/DevMountain/react-4-afternoon/blob/solution/readme-assets/4g.gif" />
 
 ## Step 4
 
