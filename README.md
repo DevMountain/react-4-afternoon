@@ -548,15 +548,39 @@ In this step, we will start setting up the a student detail view in the `./src/c
 
 ### Instructions
 
-* Open `src/routes.js`.
+* Open `./src/routes.js`.
 * Import the `Student` component to use as a route.
 * Create a `Student` route with the following properties:
   * Path: `/student/:id` - Component: `Student`.
-* Open `src/components/ClassList/ClassList.js`.
+* Open `./src/components/ClassList/ClassList.js`.
 * Import `Link` from `react-router-dom`.
 * Wrap the `h3` tag with a `Link` component.
 * Assign the `to` prop for the `Link` component to `/student/:id`, where `id` should equal the student's ID.
   * Remember to move the unique `key` prop to the outer most element of the map.
+
+<details>
+
+<summary> Detailed Instructions </summary>
+
+<br />
+
+Let's begin by opening `./src/routes.js` and `import` the `Student` component at the top of the file witht he other components. We'll need to make a new route for this `Student` component that uses an `id` route parameter. Similarly to how we did it with the `ClassList` component, we can use `axios` to fetch a specific student on load by making a match the `id`. For example, if `id` equaled `1` we could fetch a student where the `id` equaled `1`. The `path` for this route should be `/student/:id`.
+
+```js
+<Route component={ Student } path='/student/:id' />
+```
+
+Now that we have our `Student` route setup, let's open the `ClassList` component `import` the `Link` component from `react-router-dom`. We'll need to update our `map` in the `render` method to wrap the `h3` element in a `Link` component. In this `map`, we have access to all the student's properties. Therefore, if we need the `id`, we can access it by `student.id`. Let's set the `to` prop of the `Link` component to be `/student/${ student.id }`. We'll also need to move the `key` prop onto the `Link` component since it'll now be the most parent item.
+
+```js
+const students = this.state.students.map((student, i) => (
+  <Link to={`/student/${student.id}`} key={ i }>
+    <h3>{ student.first_name } { student.last_name }</h3>
+  </Link>
+));
+```
+
+</details>
 
 ### Solution
 
