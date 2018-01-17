@@ -839,25 +839,24 @@ In this step, we'll create a sub router that routes to the `About`, `History`, a
 * Import `Switch` and `Route` from `react-router-dom`.
 * Import the `History` and `Contact` components.
 * Inside the `div` with the className `box`, add a `Switch` component.
-* Add 2 routes inside the `Switch` component that will render the `History` and `Contact` components.
-  * Remember to use the same path values that we used in the `Link` components on the previous step.
-* Inside that same `Switch` component, create a third route. 
-  * Instead of using a component prop, this will use a `render` prop to render the JSX for the `About` page. Insert the following JSX in the render's function:
-<details>
-
-<summary>About JSX</summary>
-
-```js
-<div>
-  <h1 className='title'>About WestSide University:</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod eu lorem et ultricies. In porta lorem at dui semper porttitor. Nullam quis cursus dui. Cras tincidunt vehicula tellus eu facilisis. Donec nisi turpis, iaculis et arcu a, aliquet ultrices nisl. Nam in pharetra odio, ac blandit metus. Suspendisse potenti. Praesent elementum diam non orci cursus rutrum. Pellentesque condimentum ultrices dignissim. Sed a tempor ligula, vel luctus sapien. Mauris vehicula rutrum massa. Duis condimentum, ex quis ullamcorper rhoncus, erat libero tempor arcu, condimentum facilisis tellus lectus ut nunc. Pellentesque vitae faucibus diam. Vestibulum eu erat ex. Ut justo neque, varius aliquet erat vel, scelerisque convallis lacus. Mauris semper lorem mauris, sed dignissim eros consectetur nec.</p>
-</div>
-```
-
-</details>
-
-* Make sure to add this route after the History and Contact routes otherwise only the About route will be loaded.
-* You should now be able to navigate between each of the `About`, `History`, and `Contact` views from the sub nav.
+* Add 3 routes inside the `Switch` component that will render the `History` and `Contact` components.
+  * The first two should route the `History` and `Contact` components.
+    * Hint: the paths for these components are the same values used in the `to` prop on the `Link` components.
+  * The third route should render the following `JSX` ( instead of a component ) at the path of `/about`. This `path` should also be <b>exact</b>:
+    * <details>
+      
+      <summary> <code> About JSX </code> </summary>
+      
+      ```html
+      <div>
+        <h1 className='title'>About WestSide University:</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod eu lorem et ultricies. In porta lorem at dui semper porttitor. Nullam quis cursus dui. Cras tincidunt vehicula tellus eu facilisis. Donec nisi turpis, iaculis et arcu a, aliquet ultrices nisl. Nam in pharetra odio, ac blandit metus. Suspendisse potenti. Praesent elementum diam non orci cursus rutrum. Pellentesque condimentum ultrices dignissim. Sed a tempor ligula, vel luctus sapien. Mauris vehicula rutrum massa. Duis condimentum, ex quis ullamcorper rhoncus, erat libero tempor arcu, condimentum facilisis tellus lectus ut nunc. Pellentesque vitae faucibus diam. Vestibulum eu erat ex. Ut justo neque, varius aliquet erat vel, scelerisque convallis lacus. Mauris semper lorem mauris, sed dignissim eros consectetur nec.
+        </p>
+      </div>
+      ```
+      
+      </details>
 
 ### Solution
 
