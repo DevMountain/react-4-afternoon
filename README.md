@@ -14,7 +14,7 @@ In this project we will be building a site for a University to keep track of stu
 
 # Live Example
 
-<a href="https://apis.devmountain.com/routing">Click Me!</a>
+<a href="https://devmountain.github.io/react-4-afternoon/#/">Click Me!</a>
 
 <img src="https://github.com/DevMountain/react-4-afternoon/blob/solution/readme-assets/1.png" />
 
