@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios-stub';
 
 export default class ClassList extends Component {
   constructor() {
