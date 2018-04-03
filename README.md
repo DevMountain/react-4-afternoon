@@ -41,7 +41,7 @@ In this step, we'll be installing additional dependencies required for configuri
 ### Instructions
 
 * Install React Router (`npm install --save react-router-dom`).
-* Create a new file in `./src` called `routes.js` and open it.
+* Create a new file in `./src` called `Routes.js` and open it.
 * Configure a router in this file: 
   * Use the following components as routes:
     * `./src/components/Home/Home.js`
@@ -58,7 +58,7 @@ In this step, we'll be installing additional dependencies required for configuri
 
 Let's begin by installing the `react-router-dom` package. This will allow us to use routing in a react application. We can install it by running `npm install --save react-router-dom` in a terminal. Make sure the terminal is `cd` into the root project directory.
 
-Now that we have `react-router-dom`, let's create a JavaScript file that will hold all of our routes. In `.src/`, let's make a new file called `routes.js`. At the top of this file we'll need to import `React` from `react` and also import `Switch` and `Route` from `react-router-dom`.
+Now that we have `react-router-dom`, let's create a JavaScript file that will hold all of our routes. In `.src/`, let's make a new file called `Routes.js`. At the top of this file we'll need to import `React` from `react` and also import `Switch` and `Route` from `react-router-dom`.
 
 ```js
 import React from 'react';
@@ -74,15 +74,17 @@ import Home from './components/Home/Home';
 import About from './components/About/About';
 ```
 
-Now that we have all of our dependencies in `routes.js`, we can use an `export default` statement to export a router. We'll need an `exact` route at `/` to load the `Home` component and a route at `/about` to load the `About` component.
+Now that we have all of our dependencies in `Routes.js`, we can use an `export default` statement to export a router. We'll need an `exact` route at `/` to load the `Home` component and a route at `/about` to load the `About` component.
 
 ```js
-export default (
+export default function Routes(){
+  return(
   <Switch>
     <Route component={ Home } exact path="/" />
     <Route component={ About } path="/about" />
   </Switch>
 )
+}
 ```
 
 </details>
@@ -91,20 +93,22 @@ export default (
 
 <details>
 
-<summary> <code> ./src/routes.js </code> </summary>
+<summary> <code> ./src/Routes.js </code> </summary>
 
 ```js
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import Home from './components/Home/Home';
 import About from './components/About/About';
 
-export default (
-  <Switch>
-    <Route component={ Home } exact path="/" />
-    <Route component={ About } path="/about" />
-  </Switch>
-)
+export default function Routes(){
+    return(
+    <Switch>
+        <Route component={ Home } exact path='/'/>
+        <Route component={ About } path='/about'/>
+    </Switch>
+    )
+}
 ```
 
 </details>
@@ -113,7 +117,7 @@ export default (
 
 ### Summary
 
-In this step, we will take the routes we just configured in `./src/routes.js` and add it to our application in `./src/index.js`.
+In this step, we will take the routes we just configured in `./src/Routes.js` and add it to our application in `./src/index.js`.
 
 ### Instructions
 
@@ -121,8 +125,8 @@ In this step, we will take the routes we just configured in `./src/routes.js` an
 * Import `HashRouter` from `react-router-dom`.
 * Wrap the `App` component in a `HashRouter` component.
 * Open `./src/App.js`.
-* Import `routes` from `./routes.js`.
-* Underneath the `nav` element render the `routes` JSX.
+* Import `Routes` from `./Routes.js`.
+* Underneath the `nav` element render the `Routes` JSX.
 
 <details>
 
@@ -140,7 +144,7 @@ ReactDOM.render(
 , document.getElementById('root'));
 ```
 
-Now that our application is wrapped with `HashRouter`, we can render our router any where in the app. Let's open `./src/App.js` and import `./src/routes.js` at the top of the file. Then, in the `render` method, let's render our routes underneath the `nav` element.
+Now that our application is wrapped with `HashRouter`, we can render our router any where in the app. Let's open `./src/App.js` and import `./src/Routes.js` at the top of the file. Then, in the `render` method, let's render our routes underneath the `nav` element.
 
 ```js
 render() {
@@ -154,7 +158,7 @@ render() {
         </div>
       </nav>
 
-      { routes }
+      < Routes />
     </div>
   )
 }
@@ -190,7 +194,7 @@ ReactDOM.render(
 
 ```js
 import React, { Component } from 'react';
-import routes from './routes';
+import Routes from './Routes';
 
 export default class App extends Component {
   render() {
@@ -204,7 +208,7 @@ export default class App extends Component {
           </div>
         </nav>
 
-        { routes }
+        < Routes />
       </div>
     )
   }
@@ -254,7 +258,7 @@ Let's begin by opening `src/App.js` and importing `Link` from `react-router-dom`
 ```js
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import routes from './routes';
+import Routes from './Routes';
 
 export default class App extends Component {
   render() {
@@ -268,7 +272,7 @@ export default class App extends Component {
           </div>
         </nav>
 
-        { routes }
+        < Routes />
       </div>
     )
   }
@@ -289,7 +293,7 @@ In this step, we will be adding a new route for our `ClassList` component. We wi
 
 ### Instructions
 
-* Open `src/routes.js`.
+* Open `src/Routes.js`.
 * Import the `ClassList` component to use as a route.
 * Create a `ClassList` route with the following properties:
   * Path: `/classlist/:class` - Component: `ClassList`.
@@ -307,7 +311,7 @@ In this step, we will be adding a new route for our `ClassList` component. We wi
 
 <br />
 
-Let's begin by opening `src/routes.js` and importing the `ClassList` at the top of the file with the other imported components. For this component, we are going to make use of routing parameters. This will allow us to use a single component that can know what dataset to load by looking at the parameter. For example: the math parameter will be `MATH1010`, when the component loads and reads `MATH1010` we can select all the students from `db.json` with the class of `MATH1010`. If that doesn't make sense entirely don't worry, we'll go into more detail in later steps.
+Let's begin by opening `src/Routes.js` and importing the `ClassList` at the top of the file with the other imported components. For this component, we are going to make use of routing parameters. This will allow us to use a single component that can know what dataset to load by looking at the parameter. For example: the math parameter will be `MATH1010`, when the component loads and reads `MATH1010` we can select all the students from `db.json` with the class of `MATH1010`. If that doesn't make sense entirely don't worry, we'll go into more detail in later steps.
 
 For now let's add a new route that uses a path of `/classlist/:class` and uses a component of `ClassList`. The `:class` indicates a route parameter called `class` in the url. We'll cover how to access the route parameter in a later step.
 
@@ -315,7 +319,7 @@ For now let's add a new route that uses a path of `/classlist/:class` and uses a
 <Route component={ ClassList } path="/classlist/:class" />
 ```
 
-Now that we have our new route setup in `./src/routes.js`, let's open up `./src/components/Home/Home.js` and import `Link` from `react-router-dom` at the top of the file. The `Home` component renders three buttons for the classes, let's update those buttons to be wrapped in a `Link` component. For Math, we'll want to route `/classlist/MATH1010`. For English, we'll want to route to `/classlist/ENG2010`. And for Biology, we'll want to route to `/classlist/BIO2020`. If you're wondering why it's specifically `MATH1010`, `ENG2010`, and `BIO2020`; it's so that we can map over the `db.json` and make a `class` match. A student's `class` property will equal one of those three strings.
+Now that we have our new route setup in `./src/Routes.js`, let's open up `./src/components/Home/Home.js` and import `Link` from `react-router-dom` at the top of the file. The `Home` component renders three buttons for the classes, let's update those buttons to be wrapped in a `Link` component. For Math, we'll want to route `/classlist/MATH1010`. For English, we'll want to route to `/classlist/ENG2010`. And for Biology, we'll want to route to `/classlist/BIO2020`. If you're wondering why it's specifically `MATH1010`, `ENG2010`, and `BIO2020`; it's so that we can map over the `db.json` and make a `class` match. A student's `class` property will equal one of those three strings.
 
 ```js
 render() {
@@ -335,7 +339,7 @@ render() {
 
 <details>
 
-<summary> <code> ./src/routes.js </code> </summary>
+<summary> <code> ./src/Routes.js </code> </summary>
 
 ```js
 import React from 'react';
@@ -344,13 +348,15 @@ import Home from './components/Home/Home';
 import About from './components/About/About';
 import ClassList from './components/ClassList/ClassList';
 
-export default (
+export default function Routes(){
+  return(
   <Switch>
     <Route component={ Home } exact path="/" />
     <Route component={ About } path="/about" />
     <Route component={ ClassList } path="/classlist/:class" />
   </Switch>
 )
+}
 ```
 
 </details>
@@ -548,7 +554,7 @@ In this step, we will start setting up the a student detail view in the `./src/c
 
 ### Instructions
 
-* Open `./src/routes.js`.
+* Open `./src/Routes.js`.
 * Import the `Student` component to use as a route.
 * Create a `Student` route with the following properties:
   * Path: `/student/:id` - Component: `Student`.
@@ -564,7 +570,7 @@ In this step, we will start setting up the a student detail view in the `./src/c
 
 <br />
 
-Let's begin by opening `./src/routes.js` and `import` the `Student` component at the top of the file with the other components. We'll need to make a new route for this `Student` component that uses an `id` route parameter. Similarly to how we did it with the `ClassList` component, we can use `axios` to fetch a specific student on load by making a match to the `id` property. For example, if `id` equaled `1` we could fetch a student where the `id` equaled `1`. The `path` for this route should be `/student/:id`.
+Let's begin by opening `./src/Routes.js` and `import` the `Student` component at the top of the file with the other components. We'll need to make a new route for this `Student` component that uses an `id` route parameter. Similarly to how we did it with the `ClassList` component, we can use `axios` to fetch a specific student on load by making a match to the `id` property. For example, if `id` equaled `1` we could fetch a student where the `id` equaled `1`. The `path` for this route should be `/student/:id`.
 
 ```js
 <Route component={ Student } path='/student/:id' />
@@ -586,7 +592,7 @@ const students = this.state.students.map((student, i) => (
 
 <details>
 
-<summary> <code> ./src/routes.js </code> </summary>
+<summary> <code> ./src/Routes.js </code> </summary>
 
 ```js
 import React from 'react';
