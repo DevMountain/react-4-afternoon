@@ -405,6 +405,7 @@ In this step, we will update the `ClassList` component to display the students e
 * Go into the `render` method of the component.
 * `map` over the students and return an `h3` tag of the students `first` and `last` name.
   * Remember react requires a unique `key` prop on mapped elements.
+  * The properties are called `first_name` and `last_name`.
 * Undearneath the `h2` tag, render the `mapped` over students.
 * Update the `h1` tag to display the page's class name.
   * Hint: `react-router-dom` passes down a `match` object on a component's `props`.
