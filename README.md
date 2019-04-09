@@ -1018,6 +1018,16 @@ export default class About extends Component {
 
 Try adding a back button on the `Student` detail view that will route back to the `ClassList` view. You can also add a back button to the `ClassList` view that will route back to the `Home` view.
 
+## Resources
+
+<details>
+
+<summary> <code> React Router </code> </summary>
+
+* [React Training - React Router](https://reacttraining.com/react-router/web/guides/quick-start)
+
+</details>
+
 ## Contributions
 
 If you see a problem or a typo, please fork, make the necessary changes, and create a pull request so we can review your changes and merge them into the master repo and branch.
